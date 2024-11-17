@@ -1,2 +1,3 @@
 # PersonalProjects
-A place to store the projects that I have done
+A place to dump my random creations.
+Everything from projects related to finance and machine learning, to analysis of whatever I think is interesting. 

@@ -1,0 +1,1278 @@
+var _avp = _avp || [];
+
+var _hbwrap = _hbwrap || [];
+
+var pbjs = pbjs || {};
+pbjs.que = pbjs.que || [];
+
+if (typeof HBWRAP === 'undefined') {
+
+var HBWRAP = {
+  adUnits : [],
+
+  priceBucketConfig : 'high',
+
+  currencyRates :  {"USD":{"USD":1,"JPY":139.57539466521501,"BGN":1.774451097804391,"CZK":21.618581019778624,"DKK":6.761386318272545,"GBP":0.7746144075485393,"HUF":341.571402649247,"PLN":4.034930139720559,"RON":4.490564325893667,"SEK":10.596987842496823,"CHF":0.8785156958809653,"ISK":133.27889675195064,"NOK":10.280348394120848,"TRY":26.14398475775721,"AUD":1.4951007076755578,"BRL":4.851841771003447,"CAD":1.3222645617855198,"CNY":7.192342587552168,"HKD":7.826891671203048,"IDR":15068.771547813463,"ILS":3.669932861549628,"INR":82.30566140446379,"KRW":1289.0582471420794,"MXN":17.010070767555796,"MYR":4.650970785701324,"NZD":1.6165850117945926,"PHP":54.85665033569225,"SGD":1.3383233532934131,"THB":34.87025948103792,"ZAR":18.451097804391217,"EUR":0.9072763563781527},"GBP":{"USD":1.2909648855677107,"JPY":180.18693340204737,"BGN":2.2907540584225443,"CZK":27.908828972334792,"DKK":8.728712314647801,"GBP":1,"HUF":440.95668673428753,"PLN":5.208953126098058,"RON":5.797160861111761,"SEK":13.680339197451334,"CHF":1.1341329148024082,"ISK":172.0583756939727,"NOK":13.27156878821242,"TRY":33.75096629108201,"AUD":1.9301225139965799,"BRL":6.263557356696104,"CAD":1.7069971186956827,"CNY":9.285061725503057,"HKD":10.10424231066551,"IDR":19453.254936868983,"ILS":4.737754456651596,"INR":106.25371875658834,"KRW":1664.1289325118883,"MXN":21.95940406193633,"MYR":6.004239968141675,"NZD":2.0869544847618826,"PHP":70.81800932324487,"SGD":1.727728454637026,"THB":45.0162805406545,"ZAR":23.819719365644545,"EUR":1.1712619175900114}},
+  currencyCode : 'GBP',
+  bidIncrement : 0.01,
+  maxBid : 20,
+  reportableBids : {},
+
+  convertBid : function(bid, bidCpm) {
+    HBWRAP.reportableBids[bid.adId] = ('currency' in bid && bid.currency === 'GBP') ? (bidCpm * HBWRAP.currencyRates['GBP']['USD']) : bidCpm;
+    if (HBWRAP.currencyCode !== 'USD') {
+      return ('currency' in bid && bid.currency === HBWRAP.currencyCode) ? bidCpm : (HBWRAP.reportableBids[bid.adId] * HBWRAP.currencyRates['USD'][HBWRAP.currencyCode]);
+    } else {
+      return HBWRAP.reportableBids[bid.adId];
+    }
+  },
+
+  initPbjs : function() {
+    AVP.pageview = 26586001;
+
+    HBWRAP.pbjsDone = false;
+    HBWRAP.apsDone = false;
+
+    _hbwrap.map(function(el) {
+      if (el.adhesionEffect === true) {
+        var div = document.getElementById(el.tagid);
+        if (div) {
+          div.dataset.adhesionWidth = el.w; div.dataset.adhesionHeight = el.h;
+        }
+      }
+      if (typeof(HBWRAP.getZoneAuction(el.zid, el.tagid)) === 'undefined') {
+        try {
+          if (HBWRAP.isGAMTag(el.tagid) === false) {
+            var tagOpts = { tagid: el.tagid, alias: _hbopts.alias, type: _hbopts.type, zid: el.zid, pid: _hbopts.pid, contextual: el.contextual, inview: el.inview, refresh_count: HBWRAP.refreshCount, txid: el.txid };
+            if (el.onScroll === true) { tagOpts.onscroll = el.onScrollPercentage; if (el.onScrollHide === true) { tagOpts.autohide = true; } }
+            if (22786333977 > 0 && 'autoInject' in el && 'gam' in el.autoInject && 'code' in el.autoInject.gam) {
+              tagOpts.gam_network = 22786333977; tagOpts.gam_code =  el.autoInject.gam.code; tagOpts.gam_currency = 'GBP';
+              tagOpts.gam_increment = 0.01; tagOpts.gam_maxbid = 20; tagOpts.aps_pubid = '6b4befd3-bb9d-413d-bf7b-146588adacea';
+              if ('gamCodeOverride' in el) { tagOpts.gam_code = el.gamCodeOverride; }
+            }
+            _avp.push(tagOpts);
+          }
+          HBWRAP.applyEffects(el);
+        } catch (err) { console.log(err); }
+      }
+    });
+
+    AVP.load();
+
+    window.pbjsPubDomain = 'https://spotrac.com/mlb/contracts/sort-value/all-time/limit-2000/';
+    if (window.pbjsPubDomain.indexOf('ampproject.net') !== -1 || window.pbjsPubDomain.indexOf('widget.sellwild') !== -1) {
+      if (window.context && window.context.sourceUrl) { window.pbjsPubDomain = window.context.sourceUrl; }
+      if (window.pbjsPubDomain.indexOf('ampproject.net') !== -1 || window.pbjsPubDomain.indexOf('widget.sellwild') !== -1) {
+        if (window.context && window.context.referrer) { window.pbjsPubDomain = window.context.referrer; }
+        if (window.pbjsPubDomain.indexOf('ampproject.net') !== -1 || window.pbjsPubDomain.indexOf('widget.sellwild') !== -1) {
+          try { if (window.location.ancestorOrigins) { window.pbjsPubDomain = window.location.ancestorOrigins[window.location.ancestorOrigins.length-1]; } } catch (e) { }
+        }
+      }
+    }
+
+    if (HBWRAP.bidIncrement !== 0.01 || HBWRAP.maxBid !== 20) {
+      HBWRAP.priceBucketConfig = { "buckets": [{ "precision": 2, "min": 0, "max": HBWRAP.maxBid, "increment": HBWRAP.bidIncrement }] };
+    }
+
+    pbjs.que.push(function() {
+      pbjs.setConfig({ pageUrl: window.pbjsPubDomain, priceGranularity: HBWRAP.priceBucketConfig, enableSendAllBids: false, outbrain: { bidderUrl: 'https://b1h.zemanta.com/api/bidder/prebid/bid/', usersyncUrl: 'https://b1h.zemanta.com/usersync/prebid' }, userSync: { syncEnabled: (function() { var allow = true; if (0 > 0) { allow = false; } try { if (sessionStorage) { if (!sessionStorage.getItem('PBJS_SYNCED') || (new Date().getTime() - sessionStorage.getItem('PBJS_SYNCED')) > (10 * 1000)) { sessionStorage.setItem('PBJS_SYNCED', new Date().getTime()); } else { allow = false; } } } catch (e) {} return allow; })(), syncsPerBidder: 1, filterSettings: { iframe: { bidders: '*', filter: 'include' } }, userIds: [{ name: 'sharedId', storage: { type: 'cookie', name: '_pubcid', expires: 365 } }, { name: 'id5Id', params: { partner: 449 }, storage: { type: 'cookie', name: 'id5id.1st', expires: 90, refreshInSeconds: 28800 } }, { name: 'identityLink', params: { pid: '13235' }, storage: { type: 'cookie', name: 'idl_env', expires: 30 } }, { name: 'unifiedId', params: { partner: 'a65bpx9', url: '//match.adsrvr.org/track/rid?ttd_pid=a65bpx9&fmt=json' }, storage: { type: 'cookie', name: 'pbjs-unifiedid', expires: 60 } }], auctionDelay: 50 }, consentManagement: { gdpr: { cmpApi: 'IAB', timeout: 10000, allowAuctionWithoutConsent: true, defaultGdprScope: false } }, schain: {
+  validation: 'strict',
+  config: {
+    ver: '1.0',
+    complete: 1,
+    nodes: [{
+      asi: 'tradehouse.media', sid: '11255', hp: 1
+    }]
+  }
+} });
+      pbjs.aliasBidder('appnexus', 'helloearth');
+      pbjs.aliasBidder('outbrain', 'outbrain_native');
+      if (true) {
+        pbjs.aliasBidder('yahoossp', 'aol');
+        pbjs.aliasBidder('yahoossp', 'onedisplay');
+        pbjs.aliasBidder('yahoossp', 'onemobile');
+      }
+      if (pbjs.installedModules.indexOf('adagioBidAdapter') >= 0) { if (!('adagio' in pbjs.bidderSettings)) { pbjs.bidderSettings.adagio = {}; } pbjs.bidderSettings.adagio.storageAllowed = true; }
+      if (pbjs.installedModules.indexOf('lassoBidAdapter') >= 0) { if (!('lasso' in pbjs.bidderSettings)) { pbjs.bidderSettings.lasso = {}; } pbjs.bidderSettings.lasso.storageAllowed = true; }
+      if (pbjs.installedModules.indexOf('criteoBidAdapter') >= 0) { pbjs.setConfig({ 'criteo': { fastBidVersion: 'latest' } }); }
+      pbjs.addAdUnits(HBWRAP.adUnits);
+      if (HBWRAP.isGAMDetected === true && HBWRAP.refreshCount === 0) {
+        pbjs.onEvent('bidWon', function(data) { HBWRAP.onGAMRender(data); });
+        googletag.cmd.push(function() {
+          googletag.pubads().addEventListener('slotRenderEnded', function(data) { HBWRAP.onGAMRender(data); });
+          googletag.pubads().addEventListener('slotOnload', function(data) { HBWRAP.onGAMRender(data); });
+        });
+      }
+      if (HBWRAP.refreshCount === 0) {
+        pbjs.onEvent('setTargeting', function(data) {
+          var allBidResponses = pbjs.getBidResponses();
+          HBWRAP.adUnits.map(function(unit) {
+            if (unit.code in data && 'hb_bidder' in data[unit.code]) {
+              var targeting = data[unit.code];
+              if (allBidResponses && unit.code in allBidResponses) {
+                var bidResponses = allBidResponses[unit.code];
+                if (bidResponses && bidResponses.bids && bidResponses.bids.length > 0) {
+                  for (var i = 0; i < bidResponses.bids.length; i++) {
+                    var bidResponse = bidResponses.bids[i];
+                    if (bidResponse.bidderCode === targeting['hb_bidder']) {
+                      HBWRAP.winningBids[unit.code] = bidResponse;
+                    }
+                  }
+                }
+              }
+            }
+          });
+          if (HBWRAP.refreshCount === 0) { googletag.pubads().refresh(); }
+          else {
+            try {
+              var slots = googletag.pubads().getSlots();
+              if (slots) {
+                var targetSlots = [];
+                slots.map(function(slot) {
+                  var el = HBWRAP.getAdSpot(slot.getSlotElementId());
+                  if (el && el.refreshable === true && AVP.isRefreshingDisabled(el.tagid) === false && HBWRAP.isRefreshingPaused(el.tagid) === false) {
+                    targetSlots.push(slot);
+                  }
+                });
+                if (targetSlots.length > 0) { googletag.pubads().refresh(targetSlots); }
+              }
+            } catch (err) { }
+          }
+        });
+      }
+      if ('apsEnabled' in HBWRAP) {
+        if (HBWRAP.refreshCount === 0) { apstag.init({ pubID: '6b4befd3-bb9d-413d-bf7b-146588adacea', adServer: 'googletag' }); }
+        googletag.cmd.push(function() {
+          try {
+            var getApsSlotConfig = function() {
+              return googletag.pubads().getSlots().map(function(slot) {
+                return { 'slotID': slot.getSlotElementId(), 'slotName': slot.getAdUnitPath(), 'sizes': slot.getSizes().map(function(s) { return [s.width, s.height]; }) };
+              });
+            };
+            apstag.fetchBids({ slots: getApsSlotConfig() }, function (bids) { apstag.setDisplayBids(); HBWRAP.apsDone = true; HBWRAP.initAdserver(); });
+          } catch (err) { console.log(err); HBWRAP.apsDone = true; }
+        });
+      }
+      setTimeout(function() { HBWRAP.pbjsDone = true; HBWRAP.apsDone = true; HBWRAP.initAdserver(); }, (1.5 * 1200));
+      pbjs.requestBids({ bidsBackHandler: function() { HBWRAP.pbjsDone = true; HBWRAP.initAdserver(); }, timeout: 1200 });
+    });
+  },
+
+  onGAMRender : function (data) {
+    var adUnitCode = ('slot' in data) ? data.slot.getSlotElementId() : data.adUnitCode;
+    var adSpot = HBWRAP.getAdSpot(adUnitCode);
+    var adUnit = HBWRAP.getAdUnit(adUnitCode);
+    if (typeof adUnit !== 'undefined') {
+      if (!(adUnit.tagId in HBWRAP.countedBids)) {
+        HBWRAP.countedBids[adUnit.tagId] = true;
+        if (adUnit.tagId in HBWRAP.winningBids && ('adUnitCode' in data || ('advertiserId' in data && typeof data.advertiserId !== 'undefined' && data.advertiserId === 5206557336))) {
+          var winner = HBWRAP.winningBids[adUnit.tagId];
+          var url = 'https://tradehouse.advertserve.com/servlet/hbwin?mid=0&cid={CID}&pid=0&zid={ZID}&hbwrap=true&uuid=c601f78c3b6902dfabcc37389507bcf9&random=33757252&millis=20230713020208&hb_request={REQUESTID}&hb_bidder={BIDDER}&hb_cpm={CPM}&hb_adid={HBADID}&hb_dealid=null&hb_size={SIZE}&language=en&pvid=26586001&resolution=1470x841&tagid={TAGID}&refresh_count={REFRESHCOUNT}&txid={TXID}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+          url = url.replace('{CID}', adUnit.campaign);
+          url = url.replace('{ZID}', adUnit.zone);
+          url = url.replace('{REQUESTID}', adUnit.requestId);
+          url = url.replace('{TAGID}', adUnit.tagId);
+          url = url.replace('{TXID}', adUnit.txid);
+          url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+          url = url.replace('{BIDDER}', winner.bidderCode);
+          url = url.replace('{CPM}', HBWRAP.reportableBids[winner.adId]);
+          url = url.replace('{HBADID}', winner.adId);
+          url = url.replace('{SIZE}', winner.size);
+          if ('dealId' in winner && typeof winner.dealId !== 'undefined') { url = url.replace('hb_dealid=null', 'hb_dealid=' + winner.dealId); }
+          url = url.replace('&random=', '&viewable=' + AVP.isCreativeViewable(adUnit.tagId) + '&random=');
+          new Image().src = url;
+          HBWRAP.measureViewability(
+            adUnit.tagId, HBWRAP.viewabilityBeacon, HBWRAP.viewabilityBeacon, HBWRAP.getViewabilityBeaconData(adUnit.zone, adUnit.campaign, adSpot.w, adSpot.h, adUnit.bids, winner.bidderCode), new Date().getTime()
+          );
+          HBWRAP.onTagLoaded(adUnit.tagId);
+        } else {
+          var bidCount = HBWRAP.getBidCount(adUnit.code);
+          var url = 'https://tradehouse.advertserve.com/servlet/hbloss?pid=0&zid={ZID}&fcid={FCID}&uuid=c601f78c3b6902dfabcc37389507bcf9&random=46250858&millis=20230713020208&hb_request={REQUESTID}&hb_error={ERRCODE}&language=en&pvid=26586001&resolution=1470x841&tagid={TAGID}&refresh_count={REFRESHCOUNT}&txid={TXID}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+          url = url.replace('{FCID}', adUnit.campaign);
+          url = url.replace('{ZID}', adUnit.zone);
+          url = url.replace('{REQUESTID}', adUnit.requestId);
+          url = url.replace('{TAGID}', adUnit.tagId);
+          url = url.replace('{TXID}', adUnit.txid);
+          url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+          url = url.replace('{ERRCODE}', (bidCount > 0 ? 'decline' : 'timeout'));
+          url = url.replace('&random=', '&viewable=' + AVP.isCreativeViewable(adUnit.tagId) + '&random=');
+          new Image().src = url;
+          HBWRAP.measureViewability(
+            adUnit.tagId, HBWRAP.viewabilityBeacon, HBWRAP.viewabilityBeacon, HBWRAP.getViewabilityBeaconData(adUnit.zone, adUnit.campaign, adSpot.w, adSpot.h, [], 'none'), new Date().getTime()
+          );
+          HBWRAP.onTagLoaded(adUnit.tagId);
+        }
+      } else {
+        HBWRAP.onTagLoaded(adUnit.tagId);
+      }
+    } else if (typeof adSpot !== 'undefined' && !(adSpot.tagid in HBWRAP.countedBids)) {
+      HBWRAP.countedBids[adSpot.tagid] = true;
+      var url = 'https://tradehouse.advertserve.com/servlet/hbloss?pid=0&zid={ZID}&fcid={FCID}&uuid=c601f78c3b6902dfabcc37389507bcf9&random=46250858&millis=20230713020208&hb_request={REQUESTID}&hb_error={ERRCODE}&language=en&pvid=26586001&resolution=1470x841&tagid={TAGID}&refresh_count={REFRESHCOUNT}&txid={TXID}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+      url = url.replace('&fcid={FCID}', '');
+      url = url.replace('{ZID}', adSpot.zid);
+      url = url.replace('&hb_request={REQUESTID}', '');
+      url = url.replace('{TAGID}', adSpot.tagid);
+      url = url.replace('&txid={TXID}', '');
+      url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+      url = url.replace('&hb_error={ERRCODE}', '');
+      url = url.replace('&random=', '&viewable=' + AVP.isCreativeViewable(adSpot.tagid) + '&random=');
+      new Image().src = url;
+      HBWRAP.measureViewability(
+        adSpot.tagid, HBWRAP.viewabilityBeacon, HBWRAP.viewabilityBeacon, HBWRAP.getViewabilityBeaconData(adSpot.zid, 0, adSpot.w, adSpot.h, [], 'none'), new Date().getTime()
+      );
+      HBWRAP.onTagLoaded(adSpot.tagid);
+    }
+    HBWRAP.ensureScrollAware();
+    HBWRAP.ensureCloseButtonsExist();
+  },
+
+  winningBids : {},
+  countedBids : {},
+
+  getHighestBid : function (adUnitCode) {
+    var allResponses = pbjs.getBidResponses();
+    var highestBid = null;
+    if (allResponses && adUnitCode in allResponses) {
+      var bidResponses = allResponses[adUnitCode];
+      if (bidResponses && bidResponses.bids && bidResponses.bids.length > 0) {
+        for (var i = 0; i < bidResponses.bids.length; i++) {
+          var bidResponse = bidResponses.bids[i];
+          if (highestBid === null || bidResponse.cpm > highestBid.cpm) {
+            highestBid = bidResponse;
+          }
+        }
+      }
+    }
+    return highestBid;
+  },
+
+  getBidCount : function (adUnitCode) {
+    var allResponses = pbjs.getBidResponses();
+    if (allResponses && adUnitCode in allResponses) {
+      var bidResponses = allResponses[adUnitCode];
+      return (bidResponses && bidResponses.bids && bidResponses.bids.length > 0) ? bidResponses.bids.length : 0;
+    } else {
+      return 0;
+    }
+  },
+
+  initAdserverCalled : false,
+
+  initAdserver : function() {
+    if ('apsEnabled' in HBWRAP && (!HBWRAP.pbjsDone || !HBWRAP.apsDone)) { return; }
+    if (!HBWRAP.initAdserverCalled) {
+      HBWRAP.initAdserverCalled = true;
+      if (HBWRAP.isGAMDetected === true || 22786333977 > 0) {
+        _hbwrap.map(function(el) {
+          if (HBWRAP.isGAMTag(el.tagid) === true && (el.onScroll === true || el.effectCloseable === true)) {
+            HBWRAP.removeEffectObserver(el.tagid);
+            if (typeof MutationObserver === 'function') {
+              var div = document.getElementById(el.tagid);
+              HBWRAP.effectObservers[el.tagid] = new MutationObserver(function(mutations) {
+                HBWRAP.ensureScrollAware(); HBWRAP.ensureCloseButtonsExist();
+              });
+              HBWRAP.effectObservers[el.tagid].observe(div, { attributes: true, childList: true, characterData: false });
+            }
+          }
+        });
+        googletag.cmd.push(function() {
+          pbjs.que.push(function() { pbjs.setTargetingForGPTAsync(); });
+        });
+        HBWRAP.adUnits.map(function(unit) {
+          if (HBWRAP.isGAMTag(unit.tagId) === true) { HBWRAP.applyEffects(unit); }
+        });
+      }
+
+      HBWRAP.adUnits.map(function(unit) {
+        if (HBWRAP.isGAMTag(unit.tagId) === false) {
+          try {
+            HBWRAP.countedBids[unit.code] = true;
+            var bidResponse = HBWRAP.getHighestBid(unit.code);
+            if (bidResponse !== null) {
+              HBWRAP.winningBids[unit.code] = bidResponse;
+              var bidIframe = document.createElement("iframe");
+              bidIframe.setAttribute("id", unit.code + "_Creative");
+              bidIframe.setAttribute("title", "Advertisement");
+              bidIframe.setAttribute("allowtransparency", "true");
+              bidIframe.setAttribute("scrolling", "no");
+              bidIframe.setAttribute("style", "position: relative; margin:0; padding:0; width:"+bidResponse.width+"px; height:"+bidResponse.height+"px; border:0; overflow:hidden");
+              bidIframe.setAttribute("sandbox", "allow-forms allow-popups allow-popups-to-escape-sandbox allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation-by-user-activation");
+              document.getElementById(unit.code).appendChild(bidIframe);
+              var bidIframeDoc = (bidIframe.contentWindow) ? bidIframe.contentWindow.document : (bidIframe.contentDocument || bidIframe.document);
+              bidIframeDoc.open();
+              bidIframeDoc.write('<scr'+'ipt src="'+HBWRAP.getWinUrl(bidResponse,unit)+'" type="text/javascript"></scr'+'ipt>');
+              bidIframeDoc.close();
+            }
+            else {
+              var fallbackLoader = document.createElement('script');
+              fallbackLoader.type = 'text/javascript';
+              fallbackLoader.async = true;
+              fallbackLoader.src = HBWRAP.getAjaxFailUrl(HBWRAP.getBidCount(unit.code),unit);
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(fallbackLoader, firstScriptTag);
+            }
+            HBWRAP.applyEffects(unit);
+          } catch (err) { console.log(err); }
+        }
+      });
+
+      if (HBWRAP.refreshEnabled === true && (HBWRAP.refreshCount + 1) <= HBWRAP.refreshLimit) {
+        setTimeout(function() { HBWRAP.refresh(); }, HBWRAP.refreshTimeout);
+      }
+    }
+  },
+
+  identityHubEnabled : false,
+
+  identityHubInit : function() {
+    if (PWT && typeof PWT.getUserIds === "function") {
+      HBWRAP.adUnits.map(function(adUnit) {
+        adUnit.bids.map(function(bid) {
+          bid["userId"] = PWT.getUserIds();
+          bid["userIdAsEids"] = window['owp'+'bjs'].getUserIdsAsEids();
+        });
+      });
+    }
+  },
+
+  getTagExists : function (tagid) {
+    var exists = false;
+    var div = document.getElementById(tagid);
+    if (div && typeof div === 'object' && div.tagName && ['article','div','footer','header','h1','h2','h3','h4','h5','h6','p','section','span','td'].indexOf(div.tagName.toLowerCase()) != -1 && div.style.display !== 'none') {
+      exists = true;
+    }
+    return exists;
+  },
+
+  onTagLoaded : function (tagid) {
+    var adSpot = HBWRAP.getAdSpot(tagid);
+    if (typeof adSpot !== 'undefined' && adSpot.responsive === true) {
+      AVP.responsiveChangeApplier(tagid);  AVP.responsiveChangeListener();
+    }
+    if (typeof adSpot !== 'undefined' && 'gamSizeOverride' in adSpot) {
+      var adTag = document.getElementById(tagid);
+      var adIframe = (adTag) ? adTag.querySelector('iframe[id^="google_ads_iframe"]') : null;
+      if (adTag && adIframe) {
+        var adIframeWidth = parseInt(adIframe.getAttribute('width') || adIframe.clientWidth);
+        var adIframeHeight = parseInt(adIframe.getAttribute('height') || adIframe.clientHeight);
+        if (adIframeWidth <= 1) { adIframeWidth = adSpot.w; adIframeHeight = adSpot.h; }
+        if (adTag.clientWidth !== adIframeWidth || adTag.clientHeight !== adIframeHeight) {
+          if (adTag.style.margin === '') { adTag.style.margin = '0 auto'; }
+          adTag.dataset.width = adIframeWidth; adTag.style.width = adIframeWidth + 'px';
+          adTag.dataset.height = adIframeHeight; adTag.style.height = adIframeHeight + 'px';
+        }
+      }
+    }
+  },
+
+  isElementVisible : function (el) {
+    return !!( el.offsetWidth || el.offsetHeight || el.getClientRects().length );
+  },
+
+  isAutoInjectAllowed : function (el, minW, minH, maxW, maxH, rules, rule) {
+    var allowed = true;
+    if (el && typeof el === 'object' && el.tagName) {
+      if (el.tagName.toLowerCase() !== 'body') {
+        if (el.dataset && el.dataset.hbwrap) {
+          allowed = false;
+        } else if (!el.dataset || !el.dataset.injected) {
+          el.dataset.injected = 1;
+        } else if (parseInt(el.dataset.injected) < HBWRAP.getAutoInjectLimit(rules, rule)) {
+          el.dataset.injected = (parseInt(el.dataset.injected) + 1);
+        } else {
+          allowed = false;
+        }
+      }
+    }
+    if (minW > 0 && minW > (window.innerWidth||screen.width)) { allowed = false; }
+    if (maxW > 0 && maxW < (window.innerWidth||screen.width)) { allowed = false; }
+    if (minH > 0 && minH > (window.innerHeight||screen.height)) { allowed = false; }
+    if (maxH > 0 && maxH < (window.innerHeight||screen.height)) { allowed = false; }
+    return allowed;
+  },
+
+  countItems : function (list, item) {
+    var count = 0, len = list.length;
+    for (var i = 0; i < len; i++) { if (list[i] === item) { count++; } }
+    return count;
+  },
+
+  getAutoInjectLimit : function (rules, rule) {
+    var limit = 0;
+    if (rules && rule) {
+      if ('selector' in rules && 'append' in rules.selector) { limit += HBWRAP.countItems(rules.selector.append, rule); }
+      if ('selector' in rules && 'insert' in rules.selector) { limit += HBWRAP.countItems(rules.selector.insert, rule); }
+      if ('image' in rules && 'selector' in rules.image) { limit += HBWRAP.countItems(rules.image.selector, rule); }
+    }
+    return Math.max(limit, 1);
+  },
+
+  autoInjectTags : function() {
+    var injectTag = function(parentTag, tagId, w, h, minW, minH, maxW, maxH, append, rules, rule) {
+      if (HBWRAP.isElementVisible(parentTag) === true && HBWRAP.isAutoInjectAllowed(parentTag, minW, minH, maxW, maxH, rules, rule) === true) {
+        var div = document.createElement('div');
+        div.setAttribute('id', tagId);
+        div.dataset.hbwrap = true;
+        if (rules && 'styles' in rules) { div.setAttribute('style', rules.styles); div.dataset.customStyles = rules.styles; }
+        div.style.width = w + 'px'; div.style.height = h + 'px';
+        if (append === true) {
+          parentTag.appendChild(div);
+        } else {
+          parentTag.insertBefore(div, parentTag.firstChild);
+        }
+        return true;
+      } else {
+        return false;
+      }
+    };
+    var scanTag = function(el) {
+      if ('size' in el.autoInject) {
+        var tags = document.getElementsByTagName(el.autoInject.size.tag);
+        for (var x = 0; x < tags.length; x++) {
+          var tag = tags[x];
+          if (tag.clientWidth === el.w && tag.clientHeight === el.h) {
+            if (injectTag(tag, el.tagid, el.w, el.h, el.autoInject.minwidth, el.autoInject.minheight, el.autoInject.maxwidth, el.autoInject.maxheight, el.autoInject.size.append, el.autoInject) === true) {
+              return;
+            }
+          }
+        }
+      }
+      if ('selector' in el.autoInject) {
+        if ('append' in el.autoInject.selector) {
+          var rules = el.autoInject.selector.append;
+          for (var r = 0; r < rules.length; r++) {
+            var tags = document.querySelectorAll(rules[r]);
+            for (var x = 0; x < tags.length; x++) {
+              if (injectTag(tags[x], el.tagid, el.w, el.h, el.autoInject.minwidth, el.autoInject.minheight, el.autoInject.maxwidth, el.autoInject.maxheight, true, el.autoInject, rules[r]) === true) {
+                return;
+              }
+            }
+          }
+        }
+        if ('insert' in el.autoInject.selector) {
+          var rules = el.autoInject.selector.insert;
+          for (var r = 0; r < rules.length; r++) {
+            var tags = document.querySelectorAll(rules[r]);
+            for (var x = 0; x < tags.length; x++) {
+              if (injectTag(tags[x], el.tagid, el.w, el.h, el.autoInject.minwidth, el.autoInject.minheight, el.autoInject.maxwidth, el.autoInject.maxheight, false, el.autoInject, rules[r]) === true) {
+                return;
+              }
+            }
+          }
+        }
+      }
+      if ('image' in el.autoInject) {
+        var floatImage = function(image, tagId, placement, w, h) {
+          var tag = document.getElementById(tagId);
+          tag.parentNode.style.position = 'relative';
+          tag.style.position = 'absolute';
+          tag.style.zIndex = 2000001;
+          tag.style.display = 'inline-block';
+          tag.style.top = (function() {
+            if (placement.indexOf('top') !== -1) { return image.offsetTop + 'px'; }
+            else if (placement.indexOf('bottom') === -1) { return (image.offsetTop + ((image.offsetHeight - h) / 2)) + 'px'; }
+            else { return (image.offsetTop + image.offsetHeight - h) + 'px'; }
+          })();
+          tag.style.left = (function() {
+            if (placement.indexOf('left') !== -1) { return image.offsetLeft + 'px'; }
+            else if (placement.indexOf('right') === -1) { return (image.offsetLeft + ((image.offsetWidth - w) / 2)) + 'px'; }
+            else { return (image.offsetLeft + image.offsetWidth - w) + 'px'; }
+          })();
+          var closer = document.createElement('img');
+          closer.src = 'https://tradehouse.advertserve.com/images/assets/close.png';
+          closer.setAttribute('style', 'position: absolute; z-index: 2000002; display: block; cursor: pointer; top: ' + (tag.offsetTop - 12) + 'px; left: ' + (tag.offsetLeft + tag.offsetWidth - 16) + 'px');
+          closer.dataset.parenttagid = tagId; closer.dataset.w = w; closer.dataset.h = h;
+          closer.onclick = function(e) {
+            HBWRAP.removeAdUnit(document.getElementById(e.target.dataset.parenttagid), e.target.dataset.parenttagid, e.target.dataset.w, e.target.dataset.h, true);
+            e.target.style.display = 'none';
+          };
+          tag.parentNode.appendChild(closer);
+        };
+        if ('selector' in el.autoInject.image) {
+          var rules = el.autoInject.image.selector;
+          for (var r = 0; r < rules.length; r++) {
+            var tags = document.querySelectorAll(rules[r]);
+            for (var x = 0; x < tags.length; x++) {
+              if (el.w <= tags[x].offsetWidth && el.h <= tags[x].offsetHeight) {
+                if (injectTag(tags[x].parentNode, el.tagid, el.w, el.h, el.autoInject.minwidth, el.autoInject.minheight, el.autoInject.maxwidth, el.autoInject.maxheight, true, el.autoInject, rules[r]) === true) {
+                  floatImage(tags[x], el.tagid, el.autoInject.image.placement, el.w, el.h);
+                  return;
+                }
+              }
+            }
+          }
+        } else {
+          var tags = document.getElementsByTagName('img');
+          for (var x = 0; x < tags.length; x++) {
+            if (el.w <= tags[x].offsetWidth && el.h <= tags[x].offsetHeight) {
+              if (injectTag(tags[x].parentNode, el.tagid, el.w, el.h, el.autoInject.minwidth, el.autoInject.minheight, el.autoInject.maxwidth, el.autoInject.maxheight, true, el.autoInject) === true) {
+                floatImage(tags[x], el.tagid, el.autoInject.image.placement, el.w, el.h);
+                return;
+              }
+            }
+          }
+        }
+      }
+    };
+    _hbwrap.map(function(el) {
+      if ('autoInject' in el) { scanTag(el); }
+    });
+  },
+
+  verifyTagsExist : function() {
+    var removals = [];
+    for (var x = 0; x < _hbwrap.length; x++) {
+      if (HBWRAP.getTagExists(_hbwrap[x].tagid) === false) {
+        removals.push(_hbwrap[x].tagid); _hbwrap.splice(x, 1); x--;
+      } else {
+        if (_hbwrap[x].responsive === true) {
+          var div = document.getElementById(_hbwrap[x].tagid);
+          div.dataset.responsive = true;
+          if (!div.dataset.width) { div.dataset.width = _hbwrap[x].w; }
+          if (!div.dataset.height) { div.dataset.height = _hbwrap[x].h; }
+        }
+      }
+    }
+    for (var x = 0; x < HBWRAP.adUnits.length; x++) {
+      if (removals.indexOf(HBWRAP.adUnits[x].tagId) !== -1) {
+        HBWRAP.adUnits.splice(x, 1); x--;
+      }
+    }
+  },
+
+  removeClosedTags : function() {
+    var removals = [];
+    for (var x = 0; x < _hbwrap.length; x++) {
+      if (_hbwrap[x].effectCloseable === true) {
+        var div = document.getElementById(_hbwrap[x].tagid);
+        if (div && div.dataset && div.dataset.closed) {
+          removals.push(_hbwrap[x].tagid); _hbwrap.splice(x, 1); x--;
+        }
+      }
+    }
+    for (var x = 0; x < HBWRAP.adUnits.length; x++) {
+      if (removals.indexOf(HBWRAP.adUnits[x].tagId) !== -1) {
+        HBWRAP.adUnits.splice(x, 1); x--;
+      }
+    }
+  },
+
+  removeDuplicateTags : function() {
+    _hbwrap.map(function(el) {
+      var tags = document.querySelectorAll('div[id="' + el.tagid + '"]');
+      if (tags && tags.length && tags.length > 1) {
+        for (var x = 1; x < tags.length; x++) {
+          tags[x].parentNode.removeChild(tags[x]);
+          if ('console' in window) {
+            console.log('Removed duplicate tagid: ' + el.tagid + ' -- please ensure a unique tagid is used for each placement!');
+          }
+        }
+      }
+    });
+  },
+
+  getZoneAuction : function (zid, tagid) {
+    for (var i = 0; i < HBWRAP.adUnits.length; i++) {
+      if (HBWRAP.adUnits[i].zone === zid && HBWRAP.adUnits[i].tagId === tagid) {
+        return HBWRAP.adUnits[i];
+      }
+    }
+    return undefined;
+  },
+
+  getAdSpot : function (tagid) {
+    for (var i = 0; i < _hbwrap.length; i++) {
+      if (_hbwrap[i].tagid === tagid) { return _hbwrap[i]; }
+    }
+    return undefined;
+  },
+
+  getAdUnit : function (tagid) {
+    for (var i = 0; i < HBWRAP.adUnits.length; i++) {
+      if (HBWRAP.adUnits[i].tagId === tagid) { return HBWRAP.adUnits[i]; }
+    }
+    return undefined;
+  },
+
+  getZoneConfig : function (tagid) {
+    for (var i = 0; i < HBWRAP.zoneConfigs.length; i++) {
+      if (HBWRAP.zoneConfigs[i].tagid === tagid) { return HBWRAP.zoneConfigs[i]; }
+    }
+    return undefined;
+  },
+
+  getWinUrl : function(bidResponse, adUnit) {
+    var url = 'https://tradehouse.advertserve.com/servlet/view/banner/javascript/media?mid=0&cid={CID}&pid=0&zid={ZID}&hbwrap=true&uuid=c601f78c3b6902dfabcc37389507bcf9&random=95365720&millis=20230713020208&hb_request={REQUESTID}&hb_bidder={BIDDER}&hb_cpm={CPM}&hb_adid={HBADID}&hb_dealid=null&hb_size={SIZE}&language=en&pvid=26586001&resolution=1470x841&tagid={TAGID}&refresh_count={REFRESHCOUNT}&txid={TXID}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+    url = url.replace('{CID}', adUnit.campaign);
+    url = url.replace('{ZID}', adUnit.zone);
+    url = url.replace('{REQUESTID}', adUnit.requestId);
+    url = url.replace('{TAGID}', adUnit.tagId);
+    url = url.replace('{TXID}', adUnit.txid);
+    url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+    url = url.replace('{BIDDER}', bidResponse.bidderCode);
+    url = url.replace('{CPM}', HBWRAP.reportableBids[bidResponse.adId]);
+    url = url.replace('{HBADID}', bidResponse.adId);
+    url = url.replace('{SIZE}', bidResponse.size);
+    if ('dealId' in bidResponse && typeof bidResponse.dealId !== 'undefined') { url = url.replace('hb_dealid=null', 'hb_dealid=' + bidResponse.dealId); }
+    url = url.replace('&random=', '&viewable=' + AVP.isCreativeViewable(adUnit.tagId) + '&random=');
+    url = url.replace('&random=', '&cb=' + Math.floor(89999999*Math.random()+10000000) + '&random=');
+    return url;
+  },
+
+  getAjaxFailUrl : function(bidCount, adUnit) {
+    var url = 'https://tradehouse.advertserve.com/servlet/view/banner/javascript/ajax/crossdomain/zone?pid=0&zid={ZID}&fcid={FCID}&uuid=c601f78c3b6902dfabcc37389507bcf9&random=85542921&millis=20230713020208&hb_request={REQUESTID}&hb_error={ERRCODE}&language=en&pvid=26586001&resolution=1470x841&tagid={TAGID}&refresh_count={REFRESHCOUNT}&txid={TXID}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+    url = url.replace('{FCID}', adUnit.campaign);
+    url = url.replace('{ZID}', adUnit.zone);
+    url = url.replace('{REQUESTID}', adUnit.requestId);
+    url = url.replace('{TAGID}', adUnit.tagId);
+    url = url.replace('{TXID}', adUnit.txid);
+    url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+    url = url.replace('{ERRCODE}', (bidCount > 0 ? 'decline' : 'timeout'));
+    url = url.replace('&random=', '&viewable=' + AVP.isCreativeViewable(adUnit.tagId) + '&random=');
+    url = url.replace('&random=', '&cb=' + Math.floor(89999999*Math.random()+10000000) + '&random=');
+    return url;
+  },
+
+  getFailUrl : function(bidCount, adUnit) {
+    var url = 'https://tradehouse.advertserve.com/servlet/view/banner/javascript/zone?pid=0&zid={ZID}&fcid={FCID}&uuid=c601f78c3b6902dfabcc37389507bcf9&random=38334235&millis=20230713020208&hb_request={REQUESTID}&hb_error={ERRCODE}&language=en&pvid=26586001&resolution=1470x841&tagid={TAGID}&refresh_count={REFRESHCOUNT}&txid={TXID}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+    url = url.replace('{FCID}', adUnit.campaign);
+    url = url.replace('{ZID}', adUnit.zone);
+    url = url.replace('{REQUESTID}', adUnit.requestId);
+    url = url.replace('{TAGID}', adUnit.tagId);
+    url = url.replace('{TXID}', adUnit.txid);
+    url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+    url = url.replace('{ERRCODE}', (bidCount > 0 ? 'decline' : 'timeout'));
+    url = url.replace('&random=', '&viewable=' + AVP.isCreativeViewable(adUnit.tagId) + '&random=');
+    url = url.replace('&random=', '&cb=' + Math.floor(89999999*Math.random()+10000000) + '&random=');
+    return url;
+  },
+
+  measureAuctionAttempts : function() {
+    var collection = [];
+    HBWRAP.adUnits.map(function(unit) {
+      collection.push(
+        unit.zone + '-' + unit.campaign + '-' + _hbopts.pid + '-' + unit.requestId + '-' + unit.txid + '-' + HBWRAP.refreshCount
+      );
+    });
+    if (collection.length > 0) {
+      var data = collection.join('|');
+      new Image().src = 'https://tradehouse.advertserve.com/servlet/hbstat?data=' + encodeURIComponent(data) + '&random=' + Math.floor(89999999*Math.random()+10000000) + '&referrer=' + encodeURIComponent(document.location);
+    }
+  },
+
+  viewabilityBeacon : 'https://tradehouse.advertserve.com/servlet/events?type=[type]&name=[name]&ip=207.62.246.30&uuid=c601f78c3b6902dfabcc37389507bcf9&random=17710182&timestamp=20230713020208&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F',
+
+  getViewabilityBeaconData : function(zid, cid, w, h, bids, winner) {
+    var mid = 0;
+    var sid = 0;
+    if (winner !== 'none') {
+      for (var x = 0; x < bids.length; x++) {
+        if (bids[x].bidder === winner) { mid = bids[x].media; sid = bids[x].size; }
+      }
+    }
+    if (mid === 0) {
+      cid = 982;
+      if (w === 300 && h === 250) { mid = 9000; sid = 8; }
+      if (w === 160 && h === 600) { mid = 8999; sid = 13; }
+      if (w === 120 && h === 600) { mid = 8998; sid = 14; }
+      if (w === 728 && h === 90) { mid = 9003; sid = 19; }
+      if (w === 300 && h === 600) { mid = 9001; sid = 22; }
+      if (w === 970 && h === 250) { mid = 9005; sid = 25; }
+      if (w === 970 && h === 90) { mid = 9004; sid = 27; }
+      if (w === 320 && h === 50) { mid = 9002; sid = 31; }
+      if (w === 320 && h === 100) { mid = 9056; sid = 37; }
+
+    }
+    return "zid=" + zid + "&cid=" + cid + "&mid=" + mid + "&pid=" + _hbopts.pid + "&sid=" + sid;
+  },
+
+  measureViewability : function(tagId, eventsUrl, beaconUrl, beaconData, loadedAt) {
+    try { new AdvertViewability(tagId, tagId, eventsUrl, beaconUrl, beaconData, loadedAt); } catch (err) {}
+  },
+
+  refreshEnabled : true,
+  refreshRemovePubId : false,
+  refreshCount : 0,
+  refreshTimeout : 30000,
+  refreshLimit : 20,
+  refreshPageVisibility : true,
+
+  refreshPageVisibilityListener : function() {
+    if (document.visibilityState === 'visible') {
+      document.removeEventListener("visibilitychange", HBWRAP.refreshPageVisibilityListener);
+      HBWRAP.refresh();
+    }
+  },
+
+  refresh : function() {
+    if (HBWRAP.refreshPageVisibility === true && AVP.isPageVisible() === false) {
+      if ('visibilityState' in document) {
+        AVP.listen(document, "visibilitychange", HBWRAP.refreshPageVisibilityListener);
+      } else {
+        setTimeout(function() { HBWRAP.refresh(); }, 1500);
+      }
+    } else {
+      HBWRAP.refreshCount += 1;
+      if (HBWRAP.refreshCount <= HBWRAP.refreshLimit) {
+        var url = 'https://tradehouse.advertserve.com/servlet/hbwrap?stack=11&pid=0&refresh_count={REFRESHCOUNT}&txid=23669603&pvid=26586001&resolution=1440x900&random={CBRNDM}&millis={CBMILL}&referrer=https%3A%2F%2Fspotrac.com%2Fmlb%2Fcontracts%2Fsort-value%2Fall-time%2Flimit-2000%2F';
+        url = url.replace('{REFRESHCOUNT}', HBWRAP.refreshCount);
+        url = url.replace('{CBRNDM}', Math.floor(89999999*Math.random()+10000000));
+        url = url.replace('{CBMILL}', new Date().getTime());
+        var s = document.createElement('script');
+        s.type = 'text/javascript'; s.async = true; s.src = url;
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+      }
+    }
+  },
+
+  refreshingPaused : [],
+
+  pauseRefreshing : function (el) {
+    if (HBWRAP.isRefreshingPaused(el.tagid) === false) {
+      HBWRAP.refreshingPaused.push(el);
+    }
+  },
+
+  isRefreshingPaused : function (tagid) {
+    var paused = false;
+    for (var i = 0; i < HBWRAP.refreshingPaused.length; i++) {
+      if (HBWRAP.refreshingPaused[i] !== null && HBWRAP.refreshingPaused[i].tagid === tagid) { paused = true; }
+    }
+    return paused;
+  },
+
+  resumeRefreshing : function (tagid) {
+    for (var i = 0; i < HBWRAP.refreshingPaused.length; i++) {
+      if (HBWRAP.refreshingPaused[i] !== null && HBWRAP.refreshingPaused[i].tagid === tagid) { HBWRAP.refreshingPaused[i] = null; }
+    }
+  },
+
+  isRefreshingAllowed : function (tagid, refreshViewable, customRefreshTimeout) {
+    var allowed = true;
+    if (refreshViewable === true && (AVP.isPageVisible() === false || AVP.isCreativeVisible(tagid) === false)) { allowed = false; }
+    if (customRefreshTimeout > 0 && HBWRAP.refreshCount % Math.ceil(customRefreshTimeout / (HBWRAP.refreshTimeout / 1000)) !== 0) { allowed = false; }
+    return allowed;
+  },
+
+  removeOldAds : function() {
+    HBWRAP.refreshingPaused.map(function(el) {
+      if (el !== null) {
+        var div = document.getElementById(el.tagid);
+        if (div && el.refreshable === true && AVP.isRefreshingDisabled(el.tagid) === false) {
+          if (HBWRAP.isRefreshingAllowed(el.tagid, el.refreshViewable, el.refreshInterval) === true) {
+            HBWRAP.removeAdUnit(div, el.tagid, el.w, el.h, false);
+            HBWRAP.resumeRefreshing(el.tagid);
+          }
+        }
+      }
+    });
+    _hbwrap.map(function(el) {
+      var div = document.getElementById(el.tagid);
+      if (div && el.refreshable === true && AVP.isRefreshingDisabled(el.tagid) === false) {
+        if (HBWRAP.isRefreshingAllowed(el.tagid, el.refreshViewable, el.refreshInterval) === true) {
+          HBWRAP.removeAdUnit(div, el.tagid, el.w, el.h, false);
+          if (HBWRAP.isRefreshingPaused(el.tagid) === true) { HBWRAP.resumeRefreshing(el.tagid); }
+        } else {
+          HBWRAP.pauseRefreshing(el);
+        }
+      } else {
+        AVP.disableRefreshing(el.tagid);
+      }
+    });
+    pbjs.removeAdUnit();
+  },
+
+  removeAdUnit : function (div, tagid, w, h, hide) {
+    if (div && tagid) {
+      if (div.dataset && div.dataset.width) {
+        if (div.style.margin === '') {
+          div.style.margin = '0 auto';
+        }
+        div.style.boxSizing = "content-box";
+        div.style.width = div.dataset.width + 'px';
+        div.style.height = div.dataset.height + 'px';
+      }
+      else {
+        if (div.style.margin === '') {
+          div.style.margin = '0 auto';
+        }
+        div.style.boxSizing = "content-box";
+        div.style.width = w + 'px';
+        div.style.height = h + 'px';
+      }
+      var children = div.childNodes;
+      for (var c = 0; c < children.length; c++) {
+        if (children[c].style) {
+          if (children[c].style.display !== 'none') {
+            children[c].style.display = 'none';
+            if (children[c].id) {
+              children[c].id = children[c].id + "_" + new Date().getTime();
+            }
+          }
+        }
+        else {
+          children[c].style = 'display: none';
+        }
+      }
+      if (AVP.viewabilityRegistry) {
+        var len = AVP.viewabilityRegistry.length;
+        for (var x = 0; x < len; x++) {
+          var ai = AVP.viewabilityRegistry[x];
+          if ((ai.parentTagId && ai.parentTagId === tagid) || (ai.tagId && ai.tagId === tagid)) {
+            ai.disableViewableTimeTracking();
+          }
+        }
+      }
+      for (var c = 0; c < children.length; c++) {
+        if (children[c].style.display === 'none') {
+          children[c].parentNode.removeChild(children[c]);
+        }
+      }
+      if (hide === true) {
+        div.style.display = 'none';
+        div.dataset.closed = true;
+        if (HBWRAP.isGAMTag(tagid) === true) {
+          try {
+            var slots = googletag.pubads().getSlots();
+            if (slots) {
+              slots.map(function(slot) {
+                if (tagid === slot.getSlotElementId()) {
+                  googletag.destroySlots([slot]);
+                }
+              });
+            }
+          } catch (err) { }
+        }
+      }
+    }
+  },
+
+  applyEffects : function (el) {
+    var tagid = (el.tagid || el.tagId);
+    if (HBWRAP.refreshCount === 0) {
+      if ((HBWRAP.isGAMDetected === true || 'bids' in el) && el.onScroll === true) {
+        HBWRAP.makeScrollAware(tagid, el.onScrollPercentage, el.onScrollHide);
+      }
+      if (el.adhesionEffect === true) {
+        HBWRAP.makeAdhesion(tagid, el.adhesionPlacement, el.effectCloseable, el.closeButtonUrl);
+      }
+      if (el.crawlerEffect === true) {
+        HBWRAP.makeCrawler(tagid, el.crawlerAlign, el.crawlerPadding, el.crawlerBgColor, el.effectCloseable, el.closeButtonUrl);
+      }
+    }
+    if (el.effectCloseable === true && HBWRAP.isGAMDetected === false) {
+      if (!(tagid in HBWRAP.effectObservers)) { HBWRAP.installEffectObserver(tagid); }
+    }
+  },
+
+  ensureCloseButtonsExist : function() {
+    _hbwrap.map(function(el) {
+      if (el.effectCloseable === true) {
+        var div = document.getElementById(el.tagid);
+        if (div !== null && div.dataset && div.dataset.effect) {
+          var closer = document.getElementById(el.tagid + '_close');
+          if (closer === null) {
+            if (div.dataset.effect === 'adhesion') { HBWRAP.makeAdhesionCloseable(el.tagid, div.dataset.adhesionPlacement, div.dataset.closeButton); }
+            if (div.dataset.effect === 'crawler') { HBWRAP.makeCrawlerCloseable(el.tagid, div.dataset.crawlerAlign, parseInt(div.dataset.crawlerPadding), div.dataset.closeButton); }
+          }
+        }
+      }
+    });
+  },
+
+  effectObservers : {},
+
+  installEffectObserver : function (tagid) {
+    if (typeof MutationObserver === 'function') {
+      var div = document.getElementById(tagid);
+      HBWRAP.effectObservers[tagid] = new MutationObserver(function(mutations) {
+        HBWRAP.removeEffectObserver(tagid);
+        if (div.dataset && div.dataset.effect) {
+          if (div.dataset.effect === 'adhesion') { HBWRAP.makeAdhesionCloseable(tagid, div.dataset.adhesionPlacement, div.dataset.closeButton); }
+          if (div.dataset.effect === 'crawler') { HBWRAP.makeCrawlerCloseable(tagid, div.dataset.crawlerAlign, parseInt(div.dataset.crawlerPadding), div.dataset.closeButton); }
+        }
+      });
+      HBWRAP.effectObservers[tagid].observe(div, { attributes: false, childList: true, characterData: false });
+    } else {
+      setTimeout(function() { HBWRAP.ensureCloseButtonsExist(); }, 1500);
+    }
+  },
+
+  removeEffectObserver : function (tagid) {
+    if (tagid in HBWRAP.effectObservers) {
+      HBWRAP.effectObservers[tagid].disconnect();
+      delete HBWRAP.effectObservers[tagid];
+    }
+  },
+
+  makeAdhesion : function (tagid, placement, isCloseable, closeButtonUrl) {
+    var div = document.getElementById(tagid);
+    div.dataset.adhesionPlacement = placement;
+    if (isCloseable === true) {
+      div.dataset.effect = 'adhesion'; div.dataset.closeButton = closeButtonUrl;
+    }
+    var repositionAdhesion = function() {
+      if (div.style.display !== 'none' || !div.dataset || !div.dataset.repositioned) { HBWRAP.setAdhesionStyles(div, placement); div.dataset.repositioned = 'true'; }
+    };
+    setTimeout(repositionAdhesion, 250);
+    var repositionHourGlass = 10000;
+    var repositionPoller = setInterval(
+      function() {
+        if (div.style.display !== 'none') {
+          repositionAdhesion();
+          if (repositionHourGlass === 0) { clearInterval(repositionPoller); } else { repositionHourGlass -= 100; }
+        } else {
+          clearInterval(repositionPoller);
+        }
+      },
+      100
+    );
+    AVP.listen(window, "resize", repositionAdhesion);
+    AVP.listen(window, "orientationchange", repositionAdhesion);
+    if (typeof MutationObserver === 'function') {
+      var mo = new MutationObserver(function(mutations) {
+        HBWRAP.setAdhesionStyles(div, placement); div.dataset.repositioned = 'true';
+      });
+      mo.observe(div, { attributes: false, childList: true, characterData: false });
+    }
+  },
+
+  setAdhesionStyles : function (div, placement) {
+    if (div && div.dataset && div.dataset.closed) { return; }
+    var dW = (div.scrollWidth) ? div.scrollWidth : (div.offsetWidth) ? div.offsetWidth : div.clientWidth;
+    var dH = (div.scrollHeight) ? div.scrollHeight : (div.offsetHeight) ? div.offsetHeight : div.clientHeight;
+    if (dW === 0) { dW = parseInt(div.dataset.adhesionWidth); }
+    if (dH === 0) { dH = parseInt(div.dataset.adhesionHeight); }
+    var dSV = (div.style.visibility !== 'hidden') ? 'visible' : 'hidden';
+    var dBS = 'position: fixed; margin: 0 auto; z-index: 2000; text-align: center; ';
+    var dBX = (div.dataset && div.dataset.customStyles) ? '; ' + div.dataset.customStyles : '';
+    if (placement === 'top_left') { div.style = dBS + 'left: 0; top: 0' + dBX; }
+    else if (placement === 'top_center') { div.style = dBS + 'left: 50%; top: 0; margin-left: -' + (dW/2) + 'px' + dBX; }
+    else if (placement === 'top_right') { div.style = dBS + 'right: 0; top: 0' + dBX; }
+    else if (placement === 'left_center') { div.style = dBS + 'left: 0; top: 50%; margin-top: -' + (dH/2) + 'px' + dBX; }
+    else if (placement === 'center') {
+      var tagid = div.getAttribute('id');
+      var fadetoblack = document.getElementById(tagid + '_fadetoblack');
+      if (!fadetoblack) {
+        fadetoblack = document.createElement(tagid + '_fadetoblack');
+        fadetoblack.setAttribute('id', tagid + '_fadetoblack');
+        fadetoblack.setAttribute('style', 'position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; background-color: #000000; z-index: 2000000; -moz-opacity: 0.7; opacity:.70; filter: alpha(opacity=70); display: block');
+        document.body.appendChild(fadetoblack);
+      }
+      if (dSV === 'visible' && fadetoblack.style.display === 'block') { document.body.style.overflow = 'hidden'; }
+      fadetoblack.style.visibility = dSV;
+      div.style = 'position: fixed; z-index: 2000001; display: block; top: -2000px; left: -2000px' + dBX;
+      var bodyScrollHeight = (document.scrollHeight || document.body.scrollHeight || 0);
+      var vW = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      var vH = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      div.style.left = ((vW - dW) / 2) + 'px';
+      div.style.top = Math.max(((vH - dH) / 2), 40) + 'px';
+      fadetoblack.style.height = (bodyScrollHeight > 4320) ? bodyScrollHeight + 'px' : '4320px';
+    }
+    else if (placement === 'right_center') { div.style = dBS + 'right: 0; top: 50%; margin-top: -' + (dH/2) + 'px' + dBX; }
+    else if (placement === 'bottom_left') { div.style = dBS + 'left: 0; bottom: 0' + dBX; }
+    else if (placement === 'bottom_center') { div.style = dBS + 'left: 50%; bottom: 0; margin-left: -' + (dW/2) + 'px' + dBX; }
+    else if (placement === 'bottom_right') { div.style = dBS + 'right: 0; bottom: 0' + dBX; }
+    else { div.style = dBS + 'left: 50%; bottom: 0; margin-left: -' + (dW/2) + 'px' + dBX; }
+    div.style.visibility = dSV;
+  },
+
+  makeAdhesionCloseable : function (tagid, placement, closeButtonUrl) {
+    var div = document.getElementById(tagid);
+    var closeLink = document.createElement('a');
+    closeLink.setAttribute('id', tagid + '_close');
+    closeLink.href = 'javascript:void(0)';
+    AVP.listen(closeLink, "click", function(e) {
+      if (e.target.dataset.placement === 'center') { document.getElementById(e.target.dataset.parenttagid + '_fadetoblack').style.display = 'none'; document.body.style.overflow = 'visible'; }
+      HBWRAP.removeAdUnit(document.getElementById(e.target.dataset.parenttagid), e.target.dataset.parenttagid, e.target.dataset.w, e.target.dataset.h, true);
+      if (typeof adhesionCloseCallback === 'function') { adhesionCloseCallback(); }
+    });
+    if (['top_left','top_center'].indexOf(placement) != -1) { closeLink.style = 'position: absolute; bottom: -29px; right: 0px; visibility: hidden'; }
+    else if (placement === 'top_right') { closeLink.style = 'position: absolute; bottom: -29px; left: 0px; visibility: hidden'; }
+    else if (['right_center','bottom_right'].indexOf(placement) != -1) { closeLink.style = 'position: absolute; top: -29px; left: 0px; visibility: hidden'; }
+    else { closeLink.style = 'position: absolute; top: -29px; right: 0px; visibility: hidden'; }
+    var closeImg = document.createElement('img');
+    closeImg.src = closeButtonUrl; closeImg.border = 0; closeImg.style = 'display: block';
+    closeImg.dataset.parenttagid = tagid; closeImg.dataset.placement = placement; closeImg.dataset.w = div.offsetWidth; closeImg.dataset.h = div.offsetHeight;
+    closeLink.appendChild(closeImg);
+    div.appendChild(closeLink);
+    var closeHider = function() {
+      if (div.style.visibility !== 'none') {
+        var dW = (div.scrollWidth) ? div.scrollWidth : (div.offsetWidth) ? div.offsetWidth : div.clientWidth;
+        var dH = (div.scrollHeight) ? div.scrollHeight : (div.offsetHeight) ? div.offsetHeight : div.clientHeight;
+        closeLink.style.visibility = (dW > 1 && dH > 1) ? 'visible' : 'hidden';
+        setTimeout(closeHider, 500);
+      }
+    };
+    if (HBWRAP.isGAMDetected === false) {
+      closeHider(); setTimeout(closeHider, 50);
+    } else {
+      closeLink.style.visibility = 'visible';
+    }
+  },
+
+  makeCrawler : function (tagid, align, padding, bgColor, isCloseable, closeButtonUrl) {
+    var div = document.getElementById(tagid);
+    if (isCloseable === true) {
+      div.dataset.effect = 'crawler'; div.dataset.crawlerAlign = align; div.dataset.crawlerPadding = padding; div.dataset.closeButton = closeButtonUrl;
+    }
+    var customStyles = (div.dataset && div.dataset.customStyles) ? '; ' + div.dataset.customStyles : '';
+    div.setAttribute('style', 'position: fixed; left: 0; bottom:-500px; width: 100%; min-width: 100%; z-index: 2000; padding: ' + padding + 'px; margin-left: auto; margin-right: auto; background-color: ' + bgColor + '; text-align: ' + align + '; -webkit-transition: bottom 750ms ease-in-out; -moz-transition: bottom 750ms ease-in-out; -o-transition: bottom 750ms ease-in-out; transition: bottom 750ms ease-in-out' + customStyles);
+    setTimeout(function() { div.style.bottom = '0px'; }, 150);
+  },
+
+  makeCrawlerCloseable : function (tagid, align, padding, closeButtonUrl) {
+    var div = document.getElementById(tagid);
+    var closeLink = document.createElement('a');
+    closeLink.setAttribute('id', tagid + '_close');
+    closeLink.href = 'javascript:void(0)';
+    AVP.listen(closeLink, "click", function(e) {
+      HBWRAP.removeAdUnit(document.getElementById(e.target.dataset.parenttagid), e.target.dataset.parenttagid, e.target.dataset.w, e.target.dataset.h, true);
+      if (typeof crawlerCloseCallback === 'function') { crawlerCloseCallback(); }
+    });
+    closeLink.style = 'position: absolute; top: -13px; right: 0px; margin-right: ' + (padding + 16) + 'px; visibility: hidden';
+    var closeImg = document.createElement('img');
+    closeImg.src = closeButtonUrl; closeImg.border = 0; closeImg.style = 'display: block';
+    closeImg.dataset.parenttagid = tagid; closeImg.dataset.w = div.offsetWidth; closeImg.dataset.h = div.offsetHeight;
+    closeLink.appendChild(closeImg);
+    div.appendChild(closeLink);
+    var closeHider = function() {
+      if (div.style.visibility !== 'hidden') {
+        var dW = (div.scrollWidth) ? div.scrollWidth : (div.offsetWidth) ? div.offsetWidth : div.clientWidth;
+        var dH = (div.scrollHeight) ? div.scrollHeight : (div.offsetHeight) ? div.offsetHeight : div.clientHeight;
+        closeLink.style.visibility = (dW > (2*padding) && dH > (2*padding)) ? 'visible' : 'hidden';
+        setTimeout(closeHider, 500);
+      }
+    };
+    closeHider();
+    setTimeout(closeHider, 50);
+  },
+
+  makeScrollAware : function (tagid, onScrollPercentage, onScrollHide) {
+    var div = document.getElementById(tagid);
+    div.style.visibility = (HBWRAP.isScrollTargetReached(onScrollPercentage) === true) ? 'visible' : 'hidden';
+    var closer = document.getElementById(tagid + '_close');
+    if (closer) { closer.style.visibility = (HBWRAP.isScrollTargetReached(onScrollPercentage) === true) ? 'visible' : 'hidden'; }
+    var scrollLoader = function() {
+      if (div && div.dataset && div.dataset.closed) { return; }
+      var scrollTop = (document.documentElement.scrollTop || document.body.scrollTop);
+      var scrollHeight = (document.documentElement.scrollHeight || document.body.scrollHeight);
+      var scrollPercentage = ((scrollTop / (scrollHeight - document.documentElement.clientHeight)) * 100);
+      if (scrollPercentage > onScrollPercentage) {
+        window.removeEventListener('scroll', scrollLoader);
+        div.style.visibility = 'visible';
+        if (closer) { closer.style.visibility = 'visible'; }
+        if (onScrollHide === true) {
+          var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          AVP.listen(window, "scroll", function() {
+            var currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var el = document.getElementById(tagid);
+            var el_closer = document.getElementById(tagid + '_close');
+            if (el) { el.style.visibility = (currentScrollTop < lastScrollTop) ? 'hidden' : 'visible'; }
+            if (el_closer) { el_closer.style.visibility = (currentScrollTop < lastScrollTop) ? 'hidden' : 'visible'; }
+            lastScrollTop = currentScrollTop;
+          });
+        }
+      }
+    };
+    AVP.listen(window, 'scroll', scrollLoader);
+  },
+
+  ensureScrollAware : function() {
+    _hbwrap.map(function(el) {
+      if (el.onScroll === true) {
+        if (HBWRAP.isScrollTargetReached(el.onScrollPercentage) === false) {
+          var div = document.getElementById(el.tagid);
+          if (div) {
+            div.style.visibility = 'hidden';
+            var closer = document.getElementById(el.tagid + '_close');
+            if (closer) { closer.style.visibility = 'hidden'; }
+          }
+        }
+      }
+    });
+  },
+
+  isScrollTargetReached : function (onScrollPercentage) {
+    var scrollTop = (document.documentElement.scrollTop || document.body.scrollTop);
+    var scrollHeight = (document.documentElement.scrollHeight || document.body.scrollHeight);
+    var scrollPercentage = ((scrollTop / (scrollHeight - document.documentElement.clientHeight)) * 100);
+    return (scrollPercentage > onScrollPercentage) ? true : false;
+  },
+
+  isGAMDetected : false,
+
+  isGAMTag : function (tagid) {
+    var el = document.getElementById(tagid);
+    return (el && el.dataset && el.dataset.gamwrap) ? true : false;
+  },
+
+  autoTagIds : function() {
+    var tagMap = {};
+    var tags = document.querySelectorAll("[data-ad-tagid]");
+    for (var x = 0; x < tags.length; x++) {
+      var tag = tags[x];
+      var prefix = tag.dataset.adTagid;
+      var suffix = (prefix in tagMap) ? (tagMap[prefix] + 1) : 1;
+      var id = prefix + '_' + suffix;
+      if (typeof HBWRAP.getAdSpot(id) === 'undefined') { id = prefix; }
+      tag.setAttribute('id', id);
+      tag.removeAttribute('data-ad-tagid');
+      tagMap[prefix] = suffix;
+    }
+  },
+
+  mapGAMTags : function() {
+    _hbwrap.map(function(el) {
+      if ('autoInject' in el && 'gam' in el.autoInject && ('size' in el.autoInject.gam || 'tags' in el.autoInject.gam)) {
+        var tags = [];
+        if ('tags' in el.autoInject.gam) { tags = el.autoInject.gam.tags; }
+        if ('size' in el.autoInject.gam) {
+          var divs = document.querySelectorAll('div[id]:not([data-hbwrap]):not([data-gamwrap]):not([data-injected])');
+          for (var x = 0; x < divs.length; x++) {
+            var tag = divs[x];
+            if (tag.clientWidth === el.w && tag.clientHeight === el.h) {
+              tags.push(tag.id);
+            }
+          }
+        }
+        for (var t = 0; t < tags.length; t++) {
+          var tag = document.getElementById(tags[t]);
+          if (tag && (!tag.dataset || !tag.dataset.gamwrap)) {
+            tag.dataset.gamwrap = el.tagid;
+            HBWRAP.adUnits.map(function(unit) {
+              if (unit.tagId === el.tagid) {
+                unit.tagId = tags[t];
+                unit.code = tags[t];
+              }
+            });
+            el.tagid = tags[t];
+            HBWRAP.isGAMDetected = true;
+          }
+        }
+      }
+    });
+  },
+
+  injectGAMTags : function() {
+    _hbwrap.map(function(el) {
+      if (el.inview === false && 'autoInject' in el && 'gam' in el.autoInject && 'code' in el.autoInject.gam) {
+        if (HBWRAP.getTagExists(el.tagid) === true) {
+          var div = document.getElementById(el.tagid);
+          div.dataset.gamwrap = el.tagid;
+          var code = ('gamCodeOverride' in el) ? el.gamCodeOverride : el.autoInject.gam.code;
+          var sizes = ('gamSizeOverride' in el) ? el.gamSizeOverride : [el.w, el.h];
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/22786333977/' + code.replace('://', ':////'), sizes, el.tagid).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+          googletag.cmd.push(function() { googletag.display(el.tagid); });
+          HBWRAP.isGAMDetected = true;
+        }
+      }
+    });
+  }
+};
+
+if (!Array.prototype.map) {
+  Array.prototype.map = function(callback) {
+    var arr = [];
+    for (var i = 0; i < this.length; i++) { arr.push(callback(this[i], i, this)); }
+    return arr;
+  };
+}
+
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('AMPtqxqjtlSMVPcYBqfN') === false && AVP.isRefreshingDisabled('AMPtqxqjtlSMVPcYBqfN') === false)) { _hbwrap.push({ tagid: 'AMPtqxqjtlSMVPcYBqfN', zid: 1264, w: 728, h: 90, contextual: false, inview: false, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, txid: 23669603, adhesionEffect: true, adhesionPlacement: 'bottom_center', effectCloseable: true, closeButtonUrl: 'https://cdn.advertserve.com/images/tradehouse.advertserve.com/servlet/files/32#Effects/xclose.png', autoInject: {"minwidth":1520,"maxwidth":0,"minheight":0,"maxheight":0,"selector":{"append":["body"]},"gam":{"code":"spotrac.com_728x90.Adhesion"}}, gamSizeOverride: [[728,90],[468,60],[300,50],[300,100],[320,50]] }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('CyqsyXh9T7VfTwsOQefq') === false && AVP.isRefreshingDisabled('CyqsyXh9T7VfTwsOQefq') === false)) { _hbwrap.push({ tagid: 'CyqsyXh9T7VfTwsOQefq', zid: 1268, w: 1, h: 1, contextual: false, inview: false, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: false, refreshViewable: false, refreshInterval: 0, responsive: false, txid: 23669603, autoInject: {"minwidth":0,"maxwidth":0,"minheight":0,"maxheight":0,"selector":{"append":["body"]}} }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('qhGp4jb6FehUIVRkG2vW') === false && AVP.isRefreshingDisabled('qhGp4jb6FehUIVRkG2vW') === false)) { _hbwrap.push({ tagid: 'qhGp4jb6FehUIVRkG2vW', zid: 1265, w: 300, h: 250, contextual: false, inview: false, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, txid: 23669603, autoInject: {"minwidth":0,"maxwidth":0,"minheight":0,"maxheight":0,"selector":{"append":["#sidebar > div.ad:nth-of-type(1) > div.ad-wrapper"]},"gam":{"code":"spotrac.com_300x250"}}, gamSizeOverride: [[300,250],[336,280],[320,320],[300,200],[300,50],[300,100],[250,250],[200,200],[336,320],[300,300],[320,50]] }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('nJ9Q9DDfJGFp8thh8zsH') === false && AVP.isRefreshingDisabled('nJ9Q9DDfJGFp8thh8zsH') === false)) { _hbwrap.push({ tagid: 'nJ9Q9DDfJGFp8thh8zsH', zid: 1267, w: 300, h: 600, contextual: false, inview: false, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, txid: 23669603, autoInject: {"minwidth":0,"maxwidth":0,"minheight":0,"maxheight":0,"selector":{"append":["#sidebar > div.ad:nth-of-type(2) > div.ad-wrapper"]},"gam":{"code":"spotrac.com_300x600"}}, gamSizeOverride: [[300,600],[320,320],[300,300],[300,250],[250,250],[300,200],[200,200],[300,100],[336,320],[336,280],[320,50],[300,50]] }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('yw5dtEUBF1cItyuZjblu') === false && AVP.isRefreshingDisabled('yw5dtEUBF1cItyuZjblu') === false)) { _hbwrap.push({ tagid: 'yw5dtEUBF1cItyuZjblu', zid: 1266, w: 728, h: 90, contextual: false, inview: false, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, txid: 23669603, autoInject: {"minwidth":0,"maxwidth":0,"minheight":0,"maxheight":0,"selector":{"append":["#homepage > div.ad-wrapper:nth-child(1)","div.container div.ad-wrapper:nth-of-type(1)"]},"gam":{"code":"spotrac.com_728x90"}}, gamSizeOverride: [[728,90],[468,60],[300,50],[300,100],[320,50]] }); }
+
+
+HBWRAP.zoneConfigs = _hbwrap.slice();
+
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('AMPtqxqjtlSMVPcYBqfN') === false && AVP.isRefreshingDisabled('AMPtqxqjtlSMVPcYBqfN') === false)) { HBWRAP.adUnits.push({ zone: 1264, campaign: 409, tagId: 'AMPtqxqjtlSMVPcYBqfN', requestId: 88073380, txid: 23669603, adhesionEffect: true, adhesionPlacement: 'bottom_center', effectCloseable: true, closeButtonUrl: 'https://cdn.advertserve.com/images/tradehouse.advertserve.com/servlet/files/32#Effects/xclose.png', onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, floor: '0.01', code: 'AMPtqxqjtlSMVPcYBqfN', ortb2Imp: { ext: { gpid: 'https://spotrac.com_728x90!Adhesion.ZONE_(V2)', data: { pbadslot: 'https://spotrac.com_728x90!Adhesion.ZONE_(V2)' } } }, mediaTypes: { banner: { pos: 0, sizes: [[728,90]] } }, bids: [{bidder:'smartadserver',advertiser:53,media:10752,size:19,params:{siteId:581110,pageId:1755729,formatId:120360}},{bidder:'triplelift',advertiser:27,media:10645,size:19,params:{inventoryCode:'TradeHouseMedia_RON_728X90_adhesion_pb'}},{bidder:'openx',advertiser:6,media:10656,size:19,params:{unit:'558907021',placementId:'558907021',delDomain:'tradehouse-d.openx.net'}},{bidder:'appnexus',advertiser:3,media:10546,size:19,params:{placementId:'28976303'}},{bidder:'adagio',advertiser:32,media:10821,size:19,params:{organizationId:'1041',site:'tradehouse-media',adUnitElementId:'',environment:'desktop',placement:'RON_728x90.adhesion'}},{bidder:'richaudience',advertiser:31,media:10568,size:19,params:{pid:'MP_Z23yLHH4VI_Leaderboard_AD',supplyType:'Site'}},{bidder:'sovrn',advertiser:22,media:10579,size:19,params:{tagid:'1107378'}},{bidder:'rubicon',advertiser:4,media:10590,size:19,params:{accountId:'16784',siteId:'468120',zoneId:'2760018'}},{bidder:'sharethrough',advertiser:44,media:10601,size:19,params:{pkey:'XEoT1uOoq26iiCLyLhPVwq3E'}},{bidder:'ix',advertiser:24,media:10612,size:19,params:{siteId:'944180',size:[728,90]}},{bidder:'grid',advertiser:29,media:10623,size:19,params:{uid:382716}}] }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('qhGp4jb6FehUIVRkG2vW') === false && AVP.isRefreshingDisabled('qhGp4jb6FehUIVRkG2vW') === false)) { HBWRAP.adUnits.push({ zone: 1265, campaign: 264, tagId: 'qhGp4jb6FehUIVRkG2vW', requestId: 66147302, txid: 23669603, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, floor: '0.01', code: 'qhGp4jb6FehUIVRkG2vW', ortb2Imp: { ext: { gpid: 'https://www.spotrac.com_300x250!IAB.Zone_(V2)', data: { pbadslot: 'https://www.spotrac.com_300x250!IAB.Zone_(V2)' } } }, mediaTypes: { banner: { pos: 0, sizes: [[300,250]] } }, bids: [{bidder:'smartadserver',advertiser:53,media:10758,size:8,params:{siteId:581110,pageId:1755729,formatId:120365}},{bidder:'appnexus',advertiser:3,media:10552,size:8,params:{placementId:'28976246'}},{bidder:'adagio',advertiser:32,media:10824,size:8,params:{organizationId:'1041',site:'tradehouse-media',adUnitElementId:'',environment:'desktop',placement:'RON_300x250'}},{bidder:'richaudience',advertiser:31,media:10575,size:8,params:{pid:'MP_Z23yLHH4VI_MPU',supplyType:'Site'}},{bidder:'sovrn',advertiser:22,media:10586,size:8,params:{tagid:'1107391'}},{bidder:'rubicon',advertiser:4,media:10597,size:8,params:{accountId:'16784',siteId:'468116',zoneId:'2760006'}},{bidder:'sharethrough',advertiser:44,media:10608,size:8,params:{pkey:'TANzPiO99OEqh9nOc8JYkjjC'}},{bidder:'ix',advertiser:24,media:10619,size:8,params:{siteId:'944175',size:[300,250]}},{bidder:'grid',advertiser:29,media:10630,size:8,params:{uid:382722}},{bidder:'triplelift',advertiser:27,media:10652,size:8,params:{inventoryCode:'TradeHouseMedia_RON_300x250_pb'}},{bidder:'openx',advertiser:6,media:10663,size:8,params:{unit:'558906984',placementId:'558906984',delDomain:'tradehouse-d.openx.net'}}] }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('nJ9Q9DDfJGFp8thh8zsH') === false && AVP.isRefreshingDisabled('nJ9Q9DDfJGFp8thh8zsH') === false)) { HBWRAP.adUnits.push({ zone: 1267, campaign: 264, tagId: 'nJ9Q9DDfJGFp8thh8zsH', requestId: 92320104, txid: 23669603, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, floor: '0.01', code: 'nJ9Q9DDfJGFp8thh8zsH', ortb2Imp: { ext: { gpid: 'https://www.spotrac.com_300x600!IAB.Zone_(V2)', data: { pbadslot: 'https://www.spotrac.com_300x600!IAB.Zone_(V2)' } } }, mediaTypes: { banner: { pos: 0, sizes: [[300,600],[320,320],[300,300],[300,250],[250,250],[300,200],[200,200],[300,100],[336,320],[336,280],[320,50],[300,50]] } }, bids: [{bidder:'smartadserver',advertiser:53,media:10757,size:22,params:{siteId:581110,pageId:1755729,formatId:120366}},{bidder:'appnexus',advertiser:3,media:10551,size:22,params:{placementId:'28976249'}},{bidder:'adagio',advertiser:32,media:10825,size:22,params:{organizationId:'1041',site:'tradehouse-media',adUnitElementId:'',environment:'desktop',placement:'RON_300x600'}},{bidder:'richaudience',advertiser:31,media:10574,size:22,params:{pid:'MP_Z23yLHH4VI_HP',supplyType:'Site'}},{bidder:'sovrn',advertiser:22,media:10585,size:22,params:{tagid:'1107388'}},{bidder:'rubicon',advertiser:4,media:10596,size:22,params:{accountId:'16784',siteId:'468116',zoneId:'2760008'}},{bidder:'sharethrough',advertiser:44,media:10607,size:22,params:{pkey:'O6shDTgOQsofnZJGzk4AGnWV'}},{bidder:'ix',advertiser:24,media:10618,size:22,params:{siteId:'944176',size:[300,600]}},{bidder:'grid',advertiser:29,media:10629,size:22,params:{uid:382723}},{bidder:'triplelift',advertiser:27,media:10651,size:22,params:{inventoryCode:'TradeHouseMedia_RON_300x600_pb'}},{bidder:'openx',advertiser:6,media:10662,size:22,params:{unit:'558906985',placementId:'558906985',delDomain:'tradehouse-d.openx.net'}}] }); }
+if (HBWRAP.refreshCount === 0 || (HBWRAP.isRefreshingPaused('yw5dtEUBF1cItyuZjblu') === false && AVP.isRefreshingDisabled('yw5dtEUBF1cItyuZjblu') === false)) { HBWRAP.adUnits.push({ zone: 1266, campaign: 264, tagId: 'yw5dtEUBF1cItyuZjblu', requestId: 89740796, txid: 23669603, onScroll: false, onScrollPercentage: 0, onScrollHide: false, refreshable: true, refreshViewable: false, refreshInterval: 0, responsive: false, floor: '0.01', code: 'yw5dtEUBF1cItyuZjblu', ortb2Imp: { ext: { gpid: 'https://www.spotrac.com_728x90!IAB.Zone_(V2)', data: { pbadslot: 'https://www.spotrac.com_728x90!IAB.Zone_(V2)' } } }, mediaTypes: { banner: { pos: 0, sizes: [[728,90]] } }, bids: [{bidder:'appnexus',advertiser:3,media:10545,size:19,params:{placementId:'28976231'}},{bidder:'richaudience',advertiser:31,media:10567,size:19,params:{pid:'MP_Z23yLHH4VI_Leaderboard',supplyType:'Site'}},{bidder:'adagio',advertiser:32,media:10827,size:19,params:{organizationId:'1041',site:'tradehouse-media',adUnitElementId:'',environment:'desktop',placement:'RON_728x90'}},{bidder:'sovrn',advertiser:22,media:10578,size:19,params:{tagid:'1107375'}},{bidder:'rubicon',advertiser:4,media:10589,size:19,params:{accountId:'16784',siteId:'468116',zoneId:'2760000'}},{bidder:'sharethrough',advertiser:44,media:10600,size:19,params:{pkey:'XEoT1uOoq26iiCLyLhPVwq3E'}},{bidder:'ix',advertiser:24,media:10611,size:19,params:{siteId:'944172',size:[728,90]}},{bidder:'grid',advertiser:29,media:10622,size:19,params:{uid:382719}},{bidder:'triplelift',advertiser:27,media:10644,size:19,params:{inventoryCode:'TradeHouseMedia_RON_728X90_pb'}},{bidder:'openx',advertiser:6,media:10655,size:19,params:{unit:'558906981',placementId:'558906981',delDomain:'tradehouse-d.openx.net'}},{bidder:'smartadserver',advertiser:53,media:10746,size:19,params:{siteId:581110,pageId:1755729,formatId:120359}}] }); }
+
+
+pbjs.bidderSettings = {
+  standard: { bidCpmAdjustment: function(bidCpm, bid) { return HBWRAP.convertBid(bid, bidCpm); } },richaudience: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },appnexus: { bidCpmAdjustment : function(bidCpm, bid) { var cpm = (bidCpm * 1); return HBWRAP.convertBid(bid, ((cpm >= 0.01) ? cpm : 0.000)); } },grid: { bidCpmAdjustment : function(bidCpm, bid) { var cpm = (bidCpm * 0.9); return HBWRAP.convertBid(bid, ((cpm >= 0.01) ? cpm : 0.000)); } },sharethrough: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },triplelift: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },adagio: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },rubicon: { bidCpmAdjustment : function(bidCpm, bid) { var cpm = (bidCpm * 0.8); return HBWRAP.convertBid(bid, ((cpm >= 0.01) ? cpm : 0.000)); } },smartadserver: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },openx: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },sovrn: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } },ix: { bidCpmAdjustment : function(bidCpm, bid) { return HBWRAP.convertBid(bid, ((bidCpm >= 0.01) ? bidCpm : 0.000)); } }
+};
+
+HBWRAP.autoTagIds();
+HBWRAP.mapGAMTags();
+HBWRAP.autoInjectTags();
+HBWRAP.injectGAMTags();
+HBWRAP.verifyTagsExist();
+HBWRAP.removeDuplicateTags();
+
+var atsScript = document.createElement('script');
+atsScript.onload = function() {
+  window.ats.start({
+    "placementID": 13465,
+    "storageType": "localStorage",
+    "detectionType": "scrapeAndUrl",
+    "urlParameter": "env",
+    "cssSelectors": [ "input[type=text]", "input[type=email]" ],
+    "logging": "debug",
+    "pixelID": 710911
+  });
+};
+atsScript.src = 'https://ats.rlcdn.com/ats.js';
+document.body.appendChild(atsScript);
+(function() {
+  var pageUrl = document.location.toString();
+  if (pageUrl && pageUrl.indexOf("idward") !== -1) {
+    var doc=document, scr=doc.createElement("script");
+    scr.type="text/javascript"; 
+    scr.id = "idward-plugin-js";
+    scr.src="https://id-ward.com/static/light/idw_plugin_light.min.js";
+    scr.setAttribute("idw_client_id", "MTA3");
+    scr.setAttribute("idw_hide_button", "true");
+    doc.getElementsByTagName('head')[0].appendChild(scr);
+  }
+})();
+(function() {
+  var doc=document, scr=doc.createElement("script");
+  scr.type="text/javascript"; 
+  scr.id = "idward-plugin-js";
+  scr.src="https://id-ward.com/static/light/idw_plugin_light.min.js";
+  scr.setAttribute("idw_client_id", "MTA3");
+  scr.setAttribute("idw_hide_button", "true");
+  doc.getElementsByTagName('head')[0].appendChild(scr);
+})();
+
+(function() {
+  var loadScript = function (url, callback) {
+    var s = document.createElement('script');
+    s.type = 'text/javascript'; s.async = true; s.src = url; s.onload = function() { callback(); };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  };
+
+  HBWRAP.measureAuctionAttempts();
+
+  if ('6b4befd3-bb9d-413d-bf7b-146588adacea'.length > 0 && HBWRAP.refreshCount === 0) {
+    !function(a9,a,p,s,t,A,g){if(a[a9])return;function q(c,r){a[a9]._Q.push([c,r])}a[a9]={init:function(){q("i",arguments)},fetchBids:function(){q("f",arguments)},setDisplayBids:function(){},targetingKeys:function(){return[]},_Q:[]};A=p.createElement(s);A.async=!0;A.src=t;g=p.getElementsByTagName(s)[0];g.parentNode.insertBefore(A,g)}("apstag",window,document,"script","//c.amazon-adsystem.com/aax2/apstag.js");
+    HBWRAP.apsEnabled = true;
+  }
+
+  loadScript('https://tradehouse.advertserve.com/js/prebid-tradehouse-7.41.0-gdpr.js', function() {
+    loadScript('https://tradehouse.advertserve.com/js/viewability2.js', function() {
+      loadScript('https://tradehouse.advertserve.com/js/libcode3.js', function() {
+        if (HBWRAP.identityHubEnabled === true) {
+          loadScript('', function() { HBWRAP.identityHubInit(); HBWRAP.initPbjs(); });
+        }
+        else {
+          HBWRAP.initPbjs();
+        }
+      });
+    });
+  });
+})();
+
+}

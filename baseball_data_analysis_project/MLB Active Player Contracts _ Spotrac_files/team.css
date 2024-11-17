@@ -1,0 +1,151 @@
+
+.cd-tabs {clear: both;}
+#loader { margin: 0 auto; padding: 8px; text-align: center; width: 150px; display:none; }
+#playerTransactions { width:100%; }
+header.team {padding:10px 0 0 0;display:block;height:auto !important;width:100%;margin:0;overflow:hidden;}
+header.team p.currentinfo { color:#fff !important;font-size:1em;padding:0px 20px 0px 60px !important;}
+#searchNav.team {border-bottom:1px solid #2D2D2D;background:#333;height:36px;line-height:37px;padding:0px !important;overflow:hidden;position:relative;border-top:0px;margin:2px 0;}
+.team-logo {float:left; height:35px;width:35px;padding:5px;margin:2px 12px 10px 12px;display:table-cell;vertical-align:middle;background:#fff;}
+.team-logo img { vertical-align:middle;height:100%;width:100%;}
+
+#page-content header.team .team-name h1{text-transform:none !important;color:#ffffff !important;border-bottom:0px !important;margin:0px;font: 600 30px/130% "Roboto" !important;}
+/* New */
+#page-content header h2.team {  margin-bottom:0px !important;margin-top:20px !important;}
+header.team nav {float:left;background:#222;display: table;	outline: none;	cursor: pointer;	text-align: center;	border-top:1px solid #d5d5d5;width:100%;padding:1px;}
+header.team nav span {display:table-cell;width:17%;	padding: 11px 0;}
+header.team nav span a {font: 600 14px/100% 'Roboto Condensed', sans-serif;text-transform: uppercase;color: #fff;}
+header.team nav span a span.navdesc {display:block;font-size:11px;line-height:12px;padding:0px;width:100%;text-align:center;}
+header.team nav span:first-child {border-left: none;}
+header.team nav span:last-child {border-right: none;}
+header.team nav span.current {background:#fff;position:relative;top:1px;border-bottom:1px solid #fff;}
+header.team nav span.current i, header.team nav span.current a { color:#444;}
+header.team nav span:hover{	background:#3f3f3f;}
+header.team nav span.current:hover, header.team nav span.current:hover span { background:#fafafa !important;}
+.header-toggle {text-align:right;float:right;margin-top:2px;}
+
+table.team-coach {padding:0 10px;float:left;}
+table.team-coach td { line-height:14px;padding:0px;color:#fff;font-size:12px;font-weight: bold;font-family:Arial;}
+table .team-coach .coach-sep { padding:0px 6px;}
+
+#page-content header.team-header h2 { margin-left: 5px;
+  margin-bottom: 7px;
+  font-family: Roboto Condensed !important;
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  color: #222222;
+  letter-spacing: -.5px;text-transform:none !important;}
+	
+form.cap-filter {display:block;border-bottom-color:#2D2D2D;  border-bottom-style:solid;  border-bottom-width:2px;width:100%;float:left;padding-left:5px;margin-top:2px;}
+.cap-filter select { margin: 10px 0px;padding:3px;margin-right:10px;  }
+.cap-filter label {font-size:12px;text-transform:uppercase;color:#000;font-weight:bold;font-family:Helvetica;padding:0px 4px 0 8px;margin-left:6px;line-height:42px;}
+#searchNav.team li { background-image:url(https://www.spotrac.com/images/premium/phs.gif);background-position:0px 50%;background-repeat:no-repeat no-repeat;float:left;padding:0px 0px !important;vertical-align:middle;border:0px;display:table-cell;}
+#searchNav.team.mlb li { width:20%;}
+#searchNav.team.nba li { width:25%;}
+#searchNav.team.nfl li { width:20%;}
+#searchNav.team.nhl li { width:25%;}
+#searchNav.team.mls li { width:25%;}
+#searchNav.team li a {text-shadow:none;color: #333;font: 13px/23px Arial,Verdana,sans-serif;height: 40px;letter-spacing:.1px;text-transform: uppercase;font-weight:bold;padding:0px !important;background:none;margin:0px;text-align:center;width:100%;color:#fff;line-height:40px;}
+#searchNav.team li:first-child { background-image:none !important;}
+#searchNav.team li:last-child { border-right:0px;}
+#searchNav.team li.selected a{ overflow:hidden;float:left;}
+#searchNav.team li:hover a{ background:#888;}
+#searchNav.team li:hover a {color:#fff;text-shadow:1px 1px 2px #888 !important;text-decoration:none !important;}
+#searchNav.team li.selected a {color:#fff;text-decoration:none !important;text-shadow:none !important;}
+
+.ir img {position:relative;top:3px;}
+.squared{
+   width:10px;
+   height:10px;
+   float:left;margin-right:5px;
+   margin-top:3px;
+}
+.squared.p { background:#99CC66;}
+.squared.c { background	:#FF0000;}
+.squared.a { background:#FF9900;}
+.legend-name { text-transform:uppercase;font-size:12px;float:left;}
+.legend-item { float:left;position:relative;margin:8px 10px 0 10px;font:400 13px/24px "Roboto ", Arial, Helvetica, sans-serif}
+.legend-item .fa {font-size:13px;}
+
+.btn-manage {border-radius: 6px;margin-top:0px !important;}
+.manage-logo {background:#fff;overflow: hidden;border-radius:12px;padding:2px;top:-2px;position:relative;}
+/* Active Contracts Table */
+/*#teamTable  { margin-top:3px !important;}
+#playerTransactions #teamTable th.header {background: url("http://a2.espncdn.com/prod/assets/module_subheader_gradient.gif") repeat-x scroll 0 0 #E8E8E8;text-transform:uppercase;font:11px/11px Arial,Verdana,sans-serif;border-right:1px solid #fff;padding:8px 10px;}
+#playerTransactions #teamTable th.header.player { text-align:left !important;}
+#playerTransactions #teamTable th.header.right { text-align:right !important;padding:8px 10px!important;}
+#teamTable th.header.center, #teamTable td.center { text-align:center !important;}
+#teamTable th.header:last-child, #teamTable td:last-child { border-right:0px;}
+
+#teamTable td {border-right:1px solid #fff;padding:10px 3px !important;font-size:12px;font-family:'proxima-nova', helvetica !important;-webkit-font-smoothing: antialiased;font-weight: 400;color: #333;text-shadow: 0px 1px white;line-height:12px !important}
+#teamTable td.player a { font-weight:bold;	font-size:12px !important;color:#990000;}
+#playerTransactions td.playerinfo{ width:auto !important;}
+#playerTransactions #teamTable th.header.playeraverage, #playerTransactions #teamTable td.playeraverage { text-align:right !important;padding-right:8px !important;}*/
+
+
+#tooltip {background: #e3e3e3;border: 1px solid #BFBFBF;float: left;font-size: 12px;padding: 1em;position: absolute;font-family:Arial, Helvetica, sans-serif;}
+.rounded {	-moz-border-radius: 3px;	-webkit-border-radius: 3px;}
+/*#teamTable td.team { width:200px !important;}
+#teamTable td.right { text-align:right !important;padding-right:10px !important;}
+#teamTable td.center{ text-align:center;padding-right:0px !important;}
+#teamTable td.figure { width:75px !important;}
+#teamTable td.figure span { font-weight:bold !important;  }
+#teamTable td.team a { font-size:12px;font-family:Arial, Helvetica, sans-serif;font-weight:bold;padding-left:13px;color:#900;}*/
+
+.rookie{ color: #CC6600; }
+td.total.bottom {background: #ddd;font-size:12px !important;font-family:Arial, Helvetica, sans-serif;}
+.total-title span { font-style:italic;padding-left:12px;}
+/*span.tooltip { background:url("../../../images/icons/ui-icons2.png") -254px -429px no-repeat;height:14px;width:14px;float:left;position:relative;top:-2px;right:12px;}*/
+.capIgnore{ font-style:italic; color:#444;  text-decoration:line-through;}
+.ng{ color:#999; font-style:italic; cursor:pointer; }
+.activePUPList{ color:#63C; cursor:pointer; }
+.juneFirst{ font-style:italic !important; color:red; }
+table.positional tr.parent td.result { background:#ddd !important;padding:8px 10px !important;font-size:13px;color:#444;}
+table.positional tr td.result a {color:#444 !important;text-decoration:underline;font-weight:normal !important;}
+table.positional tr.parent td.result a{color:#444 !important;font-size:13px;font-weight:bold !important;}
+table.positional td.result { padding:5px 10px !important;}
+table.positional tr.parent td.result { padding:8px 10px !important;}
+table.positional tr.positiongroup td { background:#ddd !important;}
+table.positional tr.subpositiongroup td { background:#fafafa !important;}
+tr.posheaders {border-top:3px double #666 !important;}
+
+@media (max-width: 767px) {
+#mobile-subheader {display: none !important;}
+header.team { padding:10px 0px;margin-bottom:25px;}
+header .team-logo { margin:2px 10px 10px 12px;width:30px;height:30px;}
+#page-content header.team .team-name h1 {font: 600 24px/24px "Roboto" !important;}
+header.team nav {display:none !important;}
+#team-header-mobile { width:100%;margin:0px auto;text-align:center;padding-bottom:0px;padding-top:0px;}
+#team-header-mobile label { width:90% !important;margin:0px auto;float:none;padding:0px !important;}
+#team-header-mobile select { width:100% !important;margin:0px auto;font-size:16px !important;}
+header.team nav span {display:table-cell;width:auto;	padding: 11px;border-right:1px dotted #fafafa;vertical-align:middle;}
+header.team nav span a {font: 600 12px/100% 'Roboto Condensed', sans-serif;text-transform: uppercase;color: #fff;text-align:center;float:left;}
+#sidebar {margin-top:0px;}
+.header-toggle {text-align:left;float:left;width:100%;margin:10px 0px 0px 138px;}
+
+#page-content header.team-header h2 { font-size:22px !important;color:#222;line-height: 105% !important;}
+.legend {display:table !important;clear:both;width:100%;text-align:center;}
+.squared{   width:10px;   height:10px;   float:left;margin-right:5px;   margin-top:3px;}
+.squared.p { background:#99CC66;}
+.squared.c { background	:#FF0000;}
+.squared.a { background:#FF9900;}
+.legend-name { text-transform:uppercase;font-size:12px;float:left;}
+.legend-item { display:table-cell;width:auto;padding:0px 5px;}
+.legend-item:first-child {margin-left:0px !important;}
+
+.dltype {display:block;}
+}
+
+.buyout{
+	  font-size: 11px;
+  margin-left: 5px;
+  padding:0px 5px;
+  text-transform: uppercase;
+  background: none;
+  color: #008EE8;
+  text-decoration:underline;
+  border-radius: 4px;
+  border: 0px;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  }

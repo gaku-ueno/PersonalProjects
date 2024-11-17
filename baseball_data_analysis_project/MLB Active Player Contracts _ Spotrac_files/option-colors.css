@@ -1,0 +1,141 @@
+/**
+ * Current Colors
+ */
+.legend { float:right;line-height:24px;margin-right:15px;}
+.legend-item { display:inline-block;margin:0px;margin-left:15px;font-size:12px;}
+.square {width:8px;height: 8px;display:inline-block;margin-right:5px;}
+.current-year,.current-year.result{ font-weight:bold !important;background:#fafafa; }
+
+.ufa{ background: #008EE8 !important; }
+
+/**
+ * Option Colors
+ */
+.option-normal { color:none !important; cursor:pointer; color:#696969 !important; }
+.option-normal.square { background:none !important; cursor:pointer; }
+span.normal{background:#fcfcfc !important; color:#696969 !important;border: 1px solid #ccc;}
+
+
+.option-signed { color:#000 !important; cursor:pointer;}
+.option-signed.square { background:#333333 !important;}
+
+.option-club { color:#FF0000 !important; cursor:pointer; }
+.option-club.square { background:#FF0000 !important;}
+span.club{background:#FF0000 !important;}
+
+/*.option-player { color:#58B207 !important; cursor:pointer; }
+.option-player.square { background:#99CC66 !important; cursor:pointer; }
+span.player{background:#99CC66 !important;}*/
+.option-player { color:#6BA035 !important; cursor:pointer; }
+.option-player.square { background:#6BA035 !important; cursor:pointer; }
+span.player{background:#6BA035 !important;}
+
+/*.option-player-declined{ color:#58B207 !important; text-decoration:line-through; cursor:pointer; }*/
+/*.option-club-declined{ color:#FF0000 !important; text-decoration:line-through; cursor:pointer; }*/
+.option-player-declined{ color:#ddd !important; text-decoration:line-through; cursor:pointer; }
+.option-club-declined{ color:#ddd !important; text-decoration:line-through; cursor:pointer; }
+.option-early-termination-exercised{ color:#ddd !important; text-decoration:line-through; cursor:pointer; }
+
+.option-dead { color:#ddd !important; text-decoration:line-through; }
+.option-voided { text-decoration: line-through; }
+
+.option-void{ color:#FF8000 !important; cursor:pointer;  }
+.option-void.square{ background:#FF8000 !important; cursor:pointer;  }
+span.void{background:#FF8000 !important;}
+
+
+.option-minor{ color:#DCDCDC !important; font-style:italic !important; }
+.option-minor.square{ background:#DCDCDC !important; }
+
+.option-reserve-suspended { color:#990000 !important; cursor:pointer; }
+
+.option-7-day-disabled-list, .option-15-day-disabled-list, .option-60-day-disabled-list{ color:#990000 !important; cursor:pointer; }
+
+.option-estimate.square { background:#B800FF !important; cursor:pointer; }
+.option-estimate { color:#B800FF !important; cursor:pointer;}
+span.estimate{background:#B800FF !important;}
+
+.option-agreed.square { background:#CD4DFF !important; cursor:pointer; }
+.option-agreed { color:#CD4DFF !important; cursor:pointer;}
+
+.option-qualifying-offer { color:#00F !important; cursor:pointer; }
+.option-qualifying-offer.square { background:#00F !important; cursor:pointer; }
+
+/* NBA */
+
+/*.option-early-termination {color:#99CC66 !important;cursor:pointer; }
+.option-early-termination.square {background:#99CC66 !important;cursor:pointer; }*/
+.option-early-termination {color:#496D24 !important;cursor:pointer; }
+.option-early-termination.square {background:#496D24 !important;cursor:pointer; }
+span.early-termination{background:#496D24 !important;}
+
+.option-qualifying { color:#900000 !important; font-style:italic; cursor:pointer; }
+.option-qualifying.square { background:#900000 !important; cursor:pointer; }
+span.qualifying{background:#900000 !important;}
+
+.option-cap-hold { color:#B800FF !important; cursor:pointer; }
+.option-cap-hold.square { background:#B800FF !important; cursor:pointer; }
+
+.option-ng { color:#9B9B9B !important; /*font-style: italic !important;*/ cursor:pointer; }
+.option-ng.square { background:#9B9B9B !important; cursor:pointer; }
+span.ng{background:#9B9B9B !important;}
+
+.non-guaranteed{ color: #A1A1A1 !important; font-style:italic !important; }
+span.normal.non-guaranteed{ color: #A1A1A1 !important; font-style:normal !important;  }
+
+
+/* MLB */
+/*.option-arbitration-avoided, .option-arbitration-settlement { color:#FF9900 !important; cursor:pointer; } */
+
+.option-mutual { color:#966800 !important; cursor:pointer; }
+.option-mutual.square { background:#966800 !important; cursor:pointer; }
+span.mutual{background:#966800 !important;}
+.option-mutual-club-declined{ color:#ddd !important; text-decoration:line-through; cursor:pointer; }
+.option-mutual-player-declined{ color:#ddd !important; text-decoration:line-through; cursor:pointer; }
+
+.option-vested { color:#551A8B !important;cursor:pointer;}
+.option-vested.square { background:#551A8B !important;cursor:pointer;}
+span.vested{background:#551A8B !important;}
+
+.option-disabled-list{ color:#990000 !important; cursor:pointer; }
+.option-disabled-list.square{ background:#990000 !important; cursor:pointer; }
+
+.option-tc { color:#F07968 !important; cursor:pointer; }
+.option-tc.square { background:#F07968 !important; cursor:pointer; }
+
+.option-arb { color:#FF9900 !important; cursor:pointer; }
+.option-arb.square { background:#FF9900 !important; cursor:pointer; }
+
+.tc-estimate, .arb-estimate, .super-2-estimate{
+	background:#E5E5E5 !important;
+	color:#999 !important;
+	/*background:#F4DAFF !important;
+	color:#B800FF !important;*/
+}
+
+/* NFL */
+
+.option-franchise { color:#00F !important; cursor:pointer; }
+.option-franchise.square { background:#00F !important; cursor:pointer; }
+.option-transition { color:#00F; !important cursor:pointer; }
+.option-transition.square { background:#00F; !important cursor:pointer; }
+.option-june-first{ font-style:italic !important; color:red; }
+.option-june-first.square{ background:red; }
+.option-injured-reserve, .option-exempt-list, .option-short-term-injured-reserve, .option-long-term-injured-reserve, .option-non-football-injury { color:#990000 !important; cursor:pointer; }
+.option-injured-reserve.square, .option-exempt-list.square, .option-short-term-injured-reserve.square, .option-long-term-injured-reserve.square, .option-non-football-injury.square{background:#990000;}
+
+/* MLS */
+
+.option-designated { color:#00F !important; cursor:pointer; }
+.option-designated.square { background:#00F !important; cursor:pointer; }
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px)  {
+.current-year,.current-year.result{ background:none; }
+.legend { float:left;width:100%;display:block !important;clear:both;line-height:24px;margin-right:0px;margin-bottom: 15px;}
+.legend-item { display:inline-block;margin:0px;margin-left:0px;font-size:12px;}
+}
+
+
+span.bypassed{ background: #ddd !important; text-decoration: line-through !important; }
+

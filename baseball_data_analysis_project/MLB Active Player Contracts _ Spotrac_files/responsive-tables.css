@@ -1,0 +1,62 @@
+table th.center, table td.center { text-align:center;}
+table th.left, table td.left { text-align:left;}
+table th.right, table td.right {text-align:right;}
+	
+.teams {clear:both;}
+
+
+
+/* Mobile */
+@media only screen and (max-width: 768px){
+	
+
+	.pinned { position: absolute; left: 0; top: 0; background: #fff; overflow: hidden; overflow-x: auto; border-right: 1px solid #ccc; border-left: 1px solid #fff; }
+	.pinned td:last-child { border-bottom: 0; }
+	div.table-wrapper { position: relative; margin-bottom: 20px; border-right: 1px solid #ccc;height:100%;}
+	div.table-wrapper div.scrollable { margin-left: 35%; }
+	div.table-wrapper div.scrollable {overflow-x:auto; overflow-y: hidden; }
+	
+	table.responsive td.xs-hide, table.responsive th.xs-hide, table.xs-hide { display:none;visibility:hidden;height:0px;}
+	table.responsive th:first-child, table.responsive td:first-child, table.responsive td:first-child, table.responsive.pinned td {display:none; }
+	table.responsive.tracker th:first-child, table.responsive.tracker td:first-child{ display: block;}
+
+	.pinned table, table.responsive {width: 100%;border-collapse: collapse;margin:0px;padding:0px;}
+	/* Zebra striping */
+	.pinned table tr:nth-of-type(odd), table.responsive tr:nth-of-type(odd) {	background:rgba(153, 204, 255, 0.3) none repeat scroll 0 0; }
+
+	table.captotal th, .pinned table th, table.responsive th { cursor:pointer;height:20px;background:#fff;font: 300 12px/12px "Roboto", Arial, Helvetica, sans-serif !important;color: #222;text-transform:uppercase;border-top:1px solid #999999 !important;border-bottom:1px solid #999999 !important;padding:4px 10px !important;width: auto !important;}
+	.pinned table td, table.responsive td { font: 400 12px/100% Helvetica, sans-serif;padding:10px 10px !important;}
+	.pinned table td.result { background:#ddd;font-weight:bold;}
+	
+    
+	
+
+    table td.player a { color:#cc3333;font-weight:600;}
+	table.responsive td.activecontract {text-align:right !important;float:none;display:block;line-height:21px;width:130px !important;border-bottom:1px solid #fff;padding:10px 10px 10px 0!important;overflow:hidden;}
+	table.responsive td.activecontract span { float:left;padding-left:10px;padding-right:0px !important;position:relative;width:auto;}
+
+	table td.expand { border-right:0px !important;padding-right:0px;font-size:14px; }
+
+	table.captotal  {width: 100% !important;border-collapse: collapse;}
+	table.captotal th { border:1px solid #ccc !important;}
+	table.captotal th:first-child { border-left:1px solid #ccc;}
+	table.captotal tr:nth-of-type(odd){ background:#fff;}
+	table.captotal td {font: 400 12px/100% Helvetica, sans-serif;padding:10px;border-left:1px solid #eee!important;border-right:1px solid #eee !important;border-bottom:1px solid #eee;width:35% !important;}
+	table.captotal td:first-child {width:75% !important}
+	table.captotal td.result { background:#ddd;font-weight:bold;}
+	
+	table.captracker div.pinned {width:5% !important;}
+	
+	.pinned table.rankingstable td:first-child { width:75% !important;}
+	table.rankingstable div.table-wrapper div.scrollable { margin-left:75%;}	
+	.pinned table.datatable th:first-child, .pinned table.datatable td:first-child { width: 45% !important;}
+
+
+
+}
+
+@media only screen and (max-width: 768px)and (orientation:portrait) {
+	
+.pinned { width:45%;}	
+div.table-wrapper div.scrollable { margin-left:45%;}	
+}
